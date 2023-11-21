@@ -5,4 +5,10 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
+  "cSpell.words": [
+    "funcao",
+    "tailwindcss",
+    "usuario",
+    "usuarios"
+  ],
 }
