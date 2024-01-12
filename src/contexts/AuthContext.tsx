@@ -1,10 +1,10 @@
 'use client';
-import { ReactNode, createContext, useEffect, useState } from 'react';
-
-import { setCookie, parseCookies } from 'nookies';
 import { AxiosResponse } from 'axios';
-import { api } from '@/data/api';
 import { useRouter } from 'next/navigation';
+import { destroyCookie, parseCookies, setCookie } from 'nookies';
+import { createContext, ReactNode, useEffect, useState } from 'react';
+
+import { api } from '@/data/api';
 
 interface ErrorMessage {
   status?: string;
@@ -36,6 +36,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   usuario: UsuarioPerfil | null;
   signIn: (data: SignInRequestData) => Promise<void>;
+  signOut: () => void;
   authErrors: ErrorMessage[];
 }
 
@@ -113,12 +114,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  function signOut() {
+    destroyCookie(undefined, 'sh.token');
+    setUsuario(null);
+    router.push('/');
+  }
+
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
         usuario: usuarioPerfil,
         signIn,
+        signOut,
         authErrors
       }}
     >
