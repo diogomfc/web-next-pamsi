@@ -1,24 +1,17 @@
-import { useContext } from 'react';
-import Image from 'next/image';
-
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Image from 'next/image';
+import { useContext } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { BeatLoader } from 'react-spinners';
 import * as z from 'zod';
+
+import { AuthContext } from '@/contexts/AuthContext';
 
 import { TextInput } from '../text-input';
 import { Button } from '../ui/button';
 
-import { AuthContext } from '@/contexts/AuthContext';
-
-// interface ErrorMessage {
-//   status?: string;
-//   input?: string;
-//   message: string;
-// }
-
 export default function LoginForm() {
   const { signIn, authErrors } = useContext(AuthContext);
-  //const [inputErrors, setInputErrors] = useState<ErrorMessage[]>([]);
 
   const schema = z.object({
     email: z.string().email({ message: 'E-mail inválido' }),
@@ -26,34 +19,29 @@ export default function LoginForm() {
       .string()
       .min(6, { message: 'Senha deve ter no mínimo 6 caracteres' })
   });
-
   const {
     register,
     handleSubmit,
+    formState,
     formState: { errors: formErrors }
   } = useForm<FormValues>({
     resolver: zodResolver(schema)
   });
 
+  const { isSubmitting } = formState;
+
   type FormValues = z.infer<typeof schema>;
 
   const handleSignIn: SubmitHandler<FormValues> = async (data) => {
     try {
-      //console.log(data);
+      await new Promise((resolve) => setTimeout(resolve, 10000));
       await signIn({ email: data.email, senha: data.senha });
-
-      //acessar a api login
-      // const response = await api.post('/login', data);
-      // console.log(response);
     } catch (error) {
-      // if (error instanceof Error) {
-      //   setInputErrors([{ message: error.message }]);
-      // }
+      console.log(error);
     }
   };
 
   const handleInputFocus = () => {
-    //setInputErrors([]);
     authErrors.length > 0 && authErrors.splice(0, authErrors.length);
   };
 
@@ -76,6 +64,7 @@ export default function LoginForm() {
                 type="email"
                 label="E-mail"
                 name="email"
+                defaultValue={''}
                 placeholder="E-mail"
                 register={register}
                 alert={formErrors.email ? formErrors.email.message : ''}
@@ -88,6 +77,7 @@ export default function LoginForm() {
                 label="Password"
                 name="senha"
                 placeholder="Password"
+                defaultValue={''}
                 register={register}
                 alert={formErrors.senha ? formErrors.senha.message : ''}
                 onFocus={handleInputFocus}
@@ -111,9 +101,16 @@ export default function LoginForm() {
             ))}
             <Button
               type="submit"
+              disabled={isSubmitting}
               className="w-full py-8 mt-5 text-base font-semibold text-white rounded-md bg-lightMode-colors-blue-400 hover:bg-lightMode-colors-blue-300"
             >
-              Login
+              {isSubmitting ? (
+                <span className="pt-1">
+                  <BeatLoader color="#ffffff" size={15} />
+                </span>
+              ) : (
+                <span className="">Entrar</span>
+              )}
             </Button>
           </form>
 

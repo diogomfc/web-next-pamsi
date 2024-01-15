@@ -3,10 +3,14 @@ import { Metadata } from 'next';
 import { Header } from '@/components/header/header';
 
 export const metadata: Metadata = {
-  title: 'Hub'
+  title: 'Averiguação360'
 };
 
-export default function HubLayout({ children }: { children: React.ReactNode }) {
+export default function Averiguacao360Layout({
+  children
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <body className="grid min-h-screen antialiased bg-cover grid-rows-app bg-hero-pattern">
       <header className="fixed top-0 z-10 w-full">

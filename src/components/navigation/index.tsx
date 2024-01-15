@@ -39,7 +39,7 @@ export function Navigation() {
         <Separator orientation="horizontal" className="" />
       </div>
 
-      <NavLink href="/hub/averiguacao360">
+      <NavLink href="/averiguacao360">
         <DrawerClose>
           <div className="flex items-center gap-4">
             <Image

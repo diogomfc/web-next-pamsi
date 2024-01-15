@@ -11,7 +11,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Smart Hub - Pamcary',
+  title: {
+    default: 'Smart Hub - Pamcary',
+    template: '%s - SH-Pamcary'
+  },
   description: 'Sistema smart hub da Pamcary'
 };
 

@@ -1,19 +1,46 @@
 import { Info } from '@phosphor-icons/react';
 import Image from 'next/image';
+import { ReactElement } from 'react';
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger
+} from '../ui/dropdown-menu';
 
 type CardProps = {
   image: string;
   title: string;
   description: string;
-  buttonLabel: string;
+  buttonLabel: ReactElement | string;
+  popoverContent?: ReactElement;
 };
 
-export function Card({ title, description, buttonLabel, image }: CardProps) {
+export function Card({
+  title,
+  description,
+  buttonLabel,
+  image,
+  popoverContent
+}: CardProps) {
   return (
-    <div className="relative flex flex-col items-center justify-center h-64 p-4 border-8 border-solid rounded-md shadow-lg w-[340px] border-lightMode-colors-blue-100 bg-lightMode-colors-white bg-form-login-texture cursor-pointer">
-      <button title="Informações" className="absolute top-0 right-0 p-2">
-        <Info size={24} color="#BDD7F1" />
-      </button>
+    <div className="relative flex flex-col items-center justify-center h-64 p-4 border-8 border-solid rounded-md shadow-lg w-[340px] border-lightMode-colors-blue-100 bg-lightMode-colors-white  cursor-pointer">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <div
+            title="Informações"
+            className="absolute top-0 right-0 p-2 fill-lightMode-colors-blue-200 hover:fill-blue-500"
+          >
+            <Info size={24} color="" />
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          align="end"
+          className="w-[325px] border rounded-md p-8"
+        >
+          {popoverContent}
+        </DropdownMenuContent>
+      </DropdownMenu>
 
       <div className="absolute top-0">
         <Image src={image} alt={title} width={141} height={141} />
@@ -31,9 +58,7 @@ export function Card({ title, description, buttonLabel, image }: CardProps) {
         </div>
 
         <div className="flex items-center justify-center w-full h-full">
-          <button className="px-2 py-1 border rounded text-lightMode-colors-blue-500 border-lightMode-colors-blue-300/50 bg-lightMode-colors-white ">
-            {buttonLabel}
-          </button>
+          {buttonLabel}
         </div>
       </div>
     </div>

@@ -18,6 +18,7 @@ interface UsuarioPerfil {
   id?: string;
   nome: string;
   email: string;
+  telefone: string;
   funcao: Funcao;
   avatar?: string;
   criado_em?: string;
@@ -73,6 +74,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     const { 'sh.token': token } = parseCookies();
     if (token) {
+      // Defina o cabeçalho de autorização globalmente
+      api.defaults.headers.authorization = `Bearer ${token}`;
       // carregue o perfil do usuário
       fetchUserProfile(token);
     }
@@ -87,6 +90,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       //Buscar o token do usuário e armazenar em um cookie
       const { token } = response.data;
+
+      api.defaults.headers.authorization = `Bearer ${token}`;
 
       setCookie(undefined, 'sh.token', token, {
         maxAge: 60 * 60 * 1 // 1 hour
@@ -114,7 +119,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  function signOut() {
+  async function signOut() {
     destroyCookie(undefined, 'sh.token');
     setUsuario(null);
     router.push('/');

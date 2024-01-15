@@ -94,7 +94,7 @@ module.exports = {
           'linear-gradient(180deg, #CEE3F9 0%, #F5F9FC 47.92%, #CEE3F9 100%)',
         'liner-Header':
           'linear-gradient(90deg, #CEE3F9 0%, #F5F9FC 50%, #CEE3F9 100%)',
-        'hero-pattern': "url('/img/hero-pattern.svg')",
+        'hero-pattern': "url('/img/hero/hero-pattern.svg')",
         'form-login-texture': "url('/img/hero/form-login-texture.svg')",
         'footer-login-bg': "url('/img/hero/footer-login-bg.svg')"
       },
