@@ -13,7 +13,7 @@ export interface CardStatusReportProps {
 
 export interface ItemCardStatusProps {
   qtd: number;
-  statusConclusao: 'recuperado' | 'irreversivel';
+  statusConclusao: 'Recuperado' | 'Irreversivel';
   description: string;
   link: string;
 }
@@ -48,20 +48,20 @@ export function ItemCardStatus({
   return (
     <div className="flex flex-col items-center gap-4 ">
       <div
-        className={`relative box-border flex flex-col h-[100px] w-[100px] rounded-full items-center justify-center shadow-lg text-xl font-bold text-white  bg-white border border-lightMode-colors-blue-100 ${
-          statusConclusao === 'recuperado'
-            ? 'shadow-lightMode-colors-green-500'
-            : 'shadow-lightMode-colors-red-default '
+        className={`relative box-border flex flex-col h-[100px] w-[100px] rounded-full items-center justify-center shadow-md text-xl font-bold  bg-white border border-lightMode-colors-blue-100 ${
+          statusConclusao === 'Recuperado'
+            ? 'shadow-lightMode-colors-green-500/50 text-lightMode-colors-green-500'
+            : 'shadow-lightMode-colors-red-default/50 text-lightMode-colors-red-default '
         }`}
       >
         <Image
           src={
-            statusConclusao === 'irreversivel'
+            statusConclusao === 'Irreversivel'
               ? '/img/averiguacao360/imgs/img-status-report-irreversivel.svg'
               : '/img/averiguacao360/imgs/img-status-report-recuperado.svg'
           }
-          width={70}
-          height={70}
+          width={60}
+          height={60}
           alt="Status Report"
         />
         <span className="absolute">{qtd}</span>
@@ -70,7 +70,11 @@ export function ItemCardStatus({
       <span className="text-xl font-medium">{description}</span>
       <Link
         href={link}
-        className="flex items-center justify-center p-2 text-sm bg-white border rounded-md border-lightMode-colors-blue-300 hover:bg-lightMode-colors-blue-500 text-lightMode-colors-blue-500 hover:text-white"
+        className={`px-2 py-1 border rounded ${
+          statusConclusao === 'Recuperado'
+            ? ' text-lightMode-colors-green-500 border-lightMode-colors-green-500  hover:bg-lightMode-colors-green-500/10 '
+            : 'text-lightMode-colors-red-default border-lightMode-colors-red-default hover:bg-lightMode-colors-red-default/10'
+        }`}
       >
         Acessar
       </Link>

@@ -23,7 +23,9 @@ export enum Status_Relatorio {
   Finalizado,
   Aprovado,
   Rejeitado,
-  Emitido
+  Emitido,
+  Recuperado,
+  Irreversivel
 }
 
 export interface UsuarioResponsavel {

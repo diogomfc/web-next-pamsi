@@ -11,6 +11,7 @@ import {
   CardStatusReport,
   ItemCardStatus
 } from '@/components/averiguacao360/dashboard/card-status-report';
+import { CardStepStatusReport } from '@/components/averiguacao360/dashboard/card-step-status-report';
 import { Separator } from '@/components/ui/separator';
 import {
   Table,
@@ -41,6 +42,36 @@ export default function Dashboard() {
 
     getReports();
   }, []);
+
+  //Quantidade de relatorios em formalização
+  const qtdFormalizando = allReport?.relatorio_filtrado.filter(
+    (report) => report.status === 'Formalizando'
+  ).length;
+
+  //Quantidade de relatorios em emissão
+  const qtdEmitido = allReport?.relatorio_filtrado.filter(
+    (report) => report.status === 'Emitido'
+  ).length;
+
+  //Quantidade de relatorios aprovados
+  const qtdAprovado = allReport?.relatorio_filtrado.filter(
+    (report) => report.status === 'Aprovado'
+  ).length;
+
+  //Quantidade de relatorios rejeitados
+  const qtdRejeitado = allReport?.relatorio_filtrado.filter(
+    (report) => report.status === 'Rejeitado'
+  ).length;
+
+  //Quantidade de relatorios recuperados
+  const qtdRecuperado = allReport?.relatorio_filtrado.filter(
+    (report) => report.status === 'Recuperado'
+  ).length;
+
+  //Quantidade de relatorios irreversíveis
+  const qtdIrreversivel = allReport?.relatorio_filtrado.filter(
+    (report) => report.status === 'Irreversivel'
+  ).length;
 
   return (
     <div className="grid grid-cols-12 gap-8 px-8 pt-8">
@@ -80,7 +111,7 @@ export default function Dashboard() {
               description="Relatorio de Averiguação"
               icon="/img/averiguacao360/icons/icon-relatorio.svg"
               link="/averiguacao360/list-reports"
-              qtd={allReport && allReport.relatorio_filtrado.length}
+              qtd={allReport?.relatorio_filtrado.length ?? 0}
             />
             {isLoading && <CardLoader />}
           </div>
@@ -92,14 +123,14 @@ export default function Dashboard() {
             >
               <div className="flex gap-8">
                 <ItemCardStatus
-                  qtd={10}
-                  statusConclusao="recuperado"
+                  qtd={qtdRecuperado ?? 0}
+                  statusConclusao="Recuperado"
                   description="Recuperado"
                   link="/averiguacao360/recuperados"
                 />
                 <ItemCardStatus
-                  qtd={10}
-                  statusConclusao="irreversivel"
+                  qtd={qtdIrreversivel ?? 0}
+                  statusConclusao="Irreversivel"
                   description="Irreversíveis"
                   link="/averiguacao360/irreversivel"
                 />
@@ -205,7 +236,40 @@ export default function Dashboard() {
         </section>
 
         {/* Cards Step Status */}
-        <section className="grid grid-cols-12 gap-5"></section>
+        <section className="grid grid-cols-12 gap-5">
+          <div className="col-span-3">
+            <CardStepStatusReport
+              description="Relatórios em processo de formalização"
+              status="Formalizando"
+              qtd={qtdFormalizando ?? 0}
+              link="/averiguacao360/aprovados"
+            />
+          </div>
+          <div className="col-span-3">
+            <CardStepStatusReport
+              description="Relatórios aprovados para emissão"
+              status="Aprovado"
+              qtd={qtdAprovado ?? 0}
+              link="/averiguacao360/aprovados"
+            />
+          </div>
+          <div className="col-span-3">
+            <CardStepStatusReport
+              description="Relatórios emitidos"
+              status="Emitido"
+              qtd={qtdEmitido ?? 0}
+              link="/averiguacao360/aprovados"
+            />
+          </div>
+          <div className="col-span-3">
+            <CardStepStatusReport
+              description="Relatórios retornados para correção"
+              status="Rejeitado"
+              qtd={qtdRejeitado ?? 0}
+              link="/averiguacao360/aprovados"
+            />
+          </div>
+        </section>
       </main>
     </div>
   );
