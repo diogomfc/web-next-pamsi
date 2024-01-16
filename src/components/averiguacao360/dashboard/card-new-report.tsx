@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
 
+import { FormNewReport } from './new-report/form-new-report';
+
 //import { FormNewReport } from './new-report/form-new-report';
 
 export interface CardButtonProps {
@@ -57,8 +59,7 @@ export function CardNewReport({
               </DialogTrigger>
 
               <DialogContent className="flex max-w-[840px] flex-col justify-center w-full gap-0 p-0 border-8 item-center bg-white rounded-xl borde border-lightMode-colors-blue-200">
-                {/* <FormNewReport />
-                 */}
+                <FormNewReport />
               </DialogContent>
             </Dialog>
           </div>
