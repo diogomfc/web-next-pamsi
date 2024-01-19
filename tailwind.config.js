@@ -108,8 +108,10 @@ module.exports = {
         Content_Box: '0px 0px 32px rgba(31, 41, 55, 0.25)',
         Button_Form:
           '0px 16px 12px -8px rgba(0, 0, 0, 0.16), 0px 16px 8px -12px rgba(0, 0, 0, 0.12)',
+        Input_Form:
+          '0px 12px 12px rgba(0, 0, 0, 0.08), 0px 0px 8px rgba(0, 0, 0, 0.08)',
         Input_Form1:
-          '0px 12px 12px 0px rgba(27, 117, 221, 0.08), 0px 0px 8px 0px #1B75DD',
+          '0px 12px 12px 0px rgba(223, 236, 248, 0.25), 0px 0px 8px 0px rgba(223, 236, 248, 0.25)',
         Header: '0px 1px 6px rgba(0, 0, 0, 0.25)',
         Sidebar_bg: '60px 0px 90px rgba(0, 0, 0, 0.5)',
         Avatar_Profile: '1px 1px 4px rgba(0, 0, 0, 0.25)'

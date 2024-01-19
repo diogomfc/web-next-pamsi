@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 // Define as rotas públicas e privadas
 const publicRoutes = ['/'];
-const privateRoutes = ['/hub', '/users', '/teste'];
+const privateRoutes = ['/hub', '/users', '/averiguacao360'];
 
 export default function middleware(req: NextRequest) {
   // Acessar accessToken que está salvo no cookie
@@ -31,5 +31,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/hub/:path*', '/users/:path*', '/teste/:path*']
+  matcher: ['/', '/hub/:path*', '/users/:path*', '/averiguacao360/:path*']
 };

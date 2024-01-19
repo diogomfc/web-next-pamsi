@@ -1,3 +1,4 @@
+import { format, parse } from 'date-fns';
 import { FilePenLine, Mail, PhoneCall, UsersRound } from 'lucide-react';
 import Image from 'next/image';
 import { ReactNode } from 'react';
@@ -32,15 +33,12 @@ export function CardTableRow({
   usuarios_perfil
 }: CardTableRowProps) {
   // Calcula a diferença de dias entre a data de entrada e a data atual
-  const dataEntrada = new Date(data_entrada);
+  const dataParseada = parse(data_entrada, 'dd-MM-yyyy HH:mm:ss', new Date());
   const agora = new Date();
-  const diferencaTempo = Math.abs(agora.getTime() - dataEntrada.getTime());
+  const diferencaTempo = Math.abs(agora.getTime() - dataParseada.getTime());
   const diferencaDias = Math.ceil(diferencaTempo / (1000 * 60 * 60 * 24));
-  const dataFormatada = dataEntrada.toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-  });
+
+  const dataFormatada = format(dataParseada, 'dd/MM/yyyy');
 
   return (
     <>
@@ -48,7 +46,7 @@ export function CardTableRow({
         <TableCell className="pl-4">{status_report}</TableCell>
         <TableCell className="">
           <div className="flex flex-col justify-center">
-            <h1 className="font-semibold">{cliente}</h1>
+            <h1 className="font-semibold truncate w-[220px]">{cliente}</h1>
             <span className="text-xs text-muted-foreground">
               Nº {numero_processo}
             </span>

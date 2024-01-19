@@ -29,7 +29,7 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
   const isLastStep = activeStep === items.length - 1;
 
   return (
-    <div className="">
+    <div className="bg-lightMode-colors-white">
       <header className="flex items-center justify-between gap-2 px-8 py-4 bg-lightMode-colors-blue-50">
         <div className="flex items-center gap-2">
           <Image
@@ -42,9 +42,8 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
         </div>
         {/* <span className='pr-8 text-sm'>Etapa {step} de 3</span> */}
       </header>
-
-      {/* Stepper */}
       <Separator className="h-1 bg-gradient-to-r from-white via-lightMode-colors-blue-200 to-white" />
+      {/* Stepper */}
       <main className="flex items-center justify-center gap-8 p-4">
         {items.map(({ label, hasError }, index) => (
           <div key={label} className="flex items-center gap-4">
@@ -82,7 +81,7 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
       {/* <Separator className="h-1 bg-gradient-to-r from-white via-lightMode-colors-blue-200 to-white" /> */}
 
       {/* Component form inputs */}
-      <div className="">{items[activeStep].Component}</div>
+      <div className="px-8 py-4">{items[activeStep].Component}</div>
 
       {/* Footer Buttons */}
       <footer className="flex flex-col ">

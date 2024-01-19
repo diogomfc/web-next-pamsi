@@ -6,6 +6,7 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": [
+    "Apreensao",
     "averiguacao",
     "Averiguacao",
     "Averiguacoes",
@@ -33,6 +34,7 @@
     "Orgao",
     "pamcary",
     "Pamcary",
+    "Parseada",
     "Protecao",
     "recuperacao",
     "relatorio",

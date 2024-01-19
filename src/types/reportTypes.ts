@@ -28,6 +28,13 @@ export enum Status_Relatorio {
   Irreversivel
 }
 
+export enum Natureza_Sinistro {
+  Roubo,
+  Furto,
+  Apreensao,
+  Outros
+}
+
 export interface UsuarioResponsavel {
   id: string;
   nome: string;

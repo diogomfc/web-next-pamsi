@@ -43,6 +43,8 @@ export default function Dashboard() {
     getReports();
   }, []);
 
+  //listar relatórios por data mais recente com date-fns
+
   //Quantidade de relatorios em formalização
   const qtdFormalizando = allReport?.relatorio_filtrado.filter(
     (report) => report.status === 'Formalizando'

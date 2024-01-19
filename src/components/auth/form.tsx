@@ -34,7 +34,7 @@ export default function LoginForm() {
 
   const handleSignIn: SubmitHandler<FormValues> = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 10000));
+      //await new Promise((resolve) => setTimeout(resolve, 10000));
       await signIn({ email: data.email, senha: data.senha });
     } catch (error) {
       console.log(error);
