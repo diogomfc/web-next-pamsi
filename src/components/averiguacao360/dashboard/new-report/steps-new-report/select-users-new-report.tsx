@@ -101,16 +101,16 @@ export function SelectUsersNewReport() {
       <div className="">
         <div className="pb-4">
           <h1 className="text-base font-medium text-lightMode-colors-blue-700">
-            Grupo responsável pela averiguação
+            Grupo encarregado da averiguação
           </h1>
           <span className="text-xs text-muted-foreground">
-            Selecione quais os analistas autorizados para gerenciar o relatório
+            Identifique os analistas autorizados para administrar o relatório
           </span>
         </div>
 
         <div
           id="scroll-container"
-          className="space-y-4 max-h-[400px] overflow-y-auto"
+          className="space-y-2 max-h-[300px] overflow-y-auto"
         >
           {usersResponsaveis.map((user) => (
             <FormCheckBox
@@ -120,7 +120,7 @@ export function SelectUsersNewReport() {
             />
           ))}
         </div>
-        <div className="flex items-center justify-center w-full h-5 text-lightMode-colors-blue-200 ">
+        <div className="flex items-center justify-center w-full h-2 text-lightMode-colors-blue-200 ">
           {isScrollable && <ArrowDown className="animate-bounce" size={20} />}
         </div>
       </div>

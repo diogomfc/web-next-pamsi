@@ -14,7 +14,7 @@ export enum Natureza_Sinistro {
 
 export function BaseInfoNewReport() {
   return (
-    <div className="p-4 border rounded-lg border-lightMode-colors-blue-100 shadow-Box_Form">
+    <div className="px-4 py-2 border rounded-lg border-lightMode-colors-blue-100 shadow-Box_Form">
       <FormInput
         name="numero_processo"
         label="Número do processo"
@@ -42,7 +42,6 @@ export function BaseInfoNewReport() {
         label="Segurado"
         description="Insira o nome completo do cliente segurado."
         placeholder="Segurado"
-        rightIcon={<Search />}
       />
     </div>
   );

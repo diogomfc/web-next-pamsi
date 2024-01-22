@@ -54,7 +54,7 @@ export function CardNewReport({
                 </Button>
               </DialogTrigger>
 
-              <DialogContent className="flex max-w-[840px] flex-col justify-center w-full gap-0 p-0 border-8 item-center bg-white rounded-xl borde border-lightMode-colors-blue-200">
+              <DialogContent className="flex max-w-[840px] flex-col justify-center w-full gap-0 p-0 bg-white border-8 item-center rounded-xl borde border-lightMode-colors-blue-200">
                 <FormGetNewReport />
               </DialogContent>
             </Dialog>

@@ -31,7 +31,7 @@ export function FormRadioGroup({
       name={name}
       render={({ field }) => (
         <FormItem className="grid grid-cols-4 gap-4 ">
-          <div className="flex flex-col col-span-2  h-[70px] pt-2">
+          <div className="flex flex-col col-span-2 pt-4 ">
             <FormLabel className="text-base font-medium text-lightMode-colors-blue-400">
               {label}
             </FormLabel>
@@ -39,13 +39,13 @@ export function FormRadioGroup({
               {description}
             </FormDescription>
           </div>
-          <div className="col-span-2">
-            <div className="h-auto pt-4 pb-4 pl-4 rounded-md border-[1px] hover:border-lightMode-colors-blue-200 border-lightMode-colors-blue-100 shadow-Box_Form">
+          <div className="col-span-2 pb-2 ">
+            <div className="h-auto p-4 rounded-md border-[1px] hover:border-lightMode-colors-blue-200 border-lightMode-colors-blue-100 shadow-Box_Form">
               <FormControl className="">
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex flex-col space-y-1"
+                  className=""
                 >
                   {options.map((option) => (
                     <FormItem

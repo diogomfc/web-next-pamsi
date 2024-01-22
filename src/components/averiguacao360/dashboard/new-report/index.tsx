@@ -59,7 +59,7 @@ const sourceSteps = [
     hasError: false
   },
   {
-    label: 'Etapas do relatório',
+    label: 'Formulários do relatório',
     Component: <SelectStepsNewReport />,
     fields: [
       'form1_Cliente_Segurado',
@@ -83,7 +83,7 @@ const sourceSteps = [
     hasError: false
   },
   {
-    label: 'Analistas Responsáveis',
+    label: 'Grupo investigativo',
     Component: <SelectUsersNewReport />,
     fields: ['usuarios_permitidos'],
     hasError: false

@@ -141,21 +141,21 @@ export function SelectStepsNewReport() {
       <div className="">
         <div className="pb-4">
           <h1 className="text-base font-medium text-lightMode-colors-blue-700">
-            Etapas do relatório
+            Formulários vinculados ao relatório
           </h1>
           <span className="text-xs text-muted-foreground">
-            Selecione quais etapas necessárias para gerar o relatório
+            Escolha os formulários necessários para a geração do relatório.
           </span>
         </div>
         <div
           id="scroll-container"
-          className="space-y-4 max-h-[400px] overflow-y-auto"
+          className=" space-y-2 max-h-[300px] overflow-y-auto"
         >
           {sections.map((section, index) => (
             <FormSwitch key={index} {...section} />
           ))}
         </div>
-        <div className="flex items-center justify-center w-full h-5 text-lightMode-colors-blue-200 ">
+        <div className="flex items-center justify-center w-full h-2 text-lightMode-colors-blue-200 ">
           {isScrollable && <ArrowDown className="animate-bounce" size={20} />}
         </div>
       </div>

@@ -29,7 +29,7 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
   const isLastStep = activeStep === items.length - 1;
 
   return (
-    <div className="bg-lightMode-colors-white">
+    <div className="bg-white">
       <header className="flex items-center justify-between gap-2 px-8 py-4 bg-lightMode-colors-blue-50">
         <div className="flex items-center gap-2">
           <Image
@@ -46,7 +46,7 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
       </header>
       <Separator className="h-1 bg-gradient-to-r from-white via-lightMode-colors-blue-200 to-white" />
       {/* Stepper */}
-      <main className="flex items-center justify-center gap-8 p-4">
+      <main className="flex items-center justify-center gap-8 pt-4 pb-2">
         {items.map(({ label, hasError }, index) => (
           <div key={label} className="flex items-center gap-4">
             {hasError ? (
@@ -80,22 +80,21 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
           </div>
         ))}
       </main>
-      {/* <Separator className="h-1 bg-gradient-to-r from-white via-lightMode-colors-blue-200 to-white" /> */}
 
       {/* Component form inputs */}
-      <div className="px-8 py-4">{items[activeStep].Component}</div>
+      <div className="px-8 py-2">{items[activeStep].Component}</div>
 
       {/* Footer Buttons */}
       <footer className="flex flex-col ">
-        <span className="pb-2 text-xs text-center text-muted-foreground">
+        {/* <span className="pb-2 text-xs text-center text-muted-foreground">
           Preencha corretamente todos os campos para garantir o registro preciso
           e eficiente das informações.{' '}
           <span className="cursor-pointer text-lightMode-colors-blue-300 hover:text-lightMode-colors-blue-600 hover:underline">
             Central de Ajuda
           </span>
-        </span>
-        <Separator className="h-1 bg-gradient-to-r from-white via-lightMode-colors-blue-200 to-white" />
-        <div className="flex items-center justify-end gap-2 px-8 h-[60px] bg-lightMode-colors-blue-50">
+        </span> */}
+        {/* <Separator className="h-1 bg-gradient-to-r from-white via-lightMode-colors-blue-200 to-white" /> */}
+        <div className="flex items-center justify-end gap-2 px-8 h-[50px] bg-lightMode-colors-blue-50">
           <Button
             variant="ghost"
             disabled={activeStep === 0}

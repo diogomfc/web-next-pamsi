@@ -40,8 +40,8 @@ export function FormInput({
         control={control}
         name={name}
         render={({ field }) => (
-          <FormItem className="grid items-center grid-cols-4 gap-4">
-            <div className="flex flex-col col-span-2  h-[70px]">
+          <FormItem className="grid items-center grid-cols-4 gap-4 ">
+            <div className="flex flex-col col-span-2 h-[60px] ">
               <FormLabel className="text-base font-medium text-lightMode-colors-blue-400">
                 {label}
               </FormLabel>
@@ -49,7 +49,7 @@ export function FormInput({
                 {description}
               </FormDescription>
             </div>
-            <div className="col-span-2 h-[70px]">
+            <div className="col-span-2 ">
               <FormControl className="">
                 <>
                   <div className="flex items-center">
@@ -57,9 +57,8 @@ export function FormInput({
                       placeholder={placeholder}
                       {...field}
                       ref={name === 'cnpj' ? inputRef : undefined}
-                      className={`h-12 pl-5 pr-5 shadow-Box_Form border border-blue-100 bg-white hover:border-blue-200 hover:bg-white hover:shadow-Input_Form1 hover:outline-none focus:border-blue-200 focus:bg-white focus:shadow-Input_Form1 focus:outline-none
-                      focus-visible:ring-1 focus-visible:ring-blue-50 focus-visible:ring-opacity-50
-                       `}
+                      className={`h-12 px-4 shadow-Box_Form border border-blue-100 bg-white hover:border-blue-200 hover:bg-white hover:shadow-Input_Form1 hover:outline-none focus:border-blue-200 focus:bg-white focus:shadow-Input_Form1 focus:outline-none
+                      focus-visible:ring-1 focus-visible:ring-blue-50 focus-visible:ring-opacity-50 placeholder:opacity-20`}
                     />
                     {rightIcon && (
                       <div className="absolute right-16 text-lightMode-colors-gray-100">

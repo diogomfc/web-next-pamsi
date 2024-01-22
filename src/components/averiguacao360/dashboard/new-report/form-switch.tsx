@@ -31,7 +31,7 @@ export function FormSwitch({
       name={name}
       render={({ field }) => (
         <FormItem
-          className={`flex flex-row items-center justify-between pr-3 bg-white border border-blue-100 rounded-lg shadow-Box_Form hover:border-blue-300  hover:shadow-Input_Form1 ${
+          className={`flex flex-row items-center justify-between pr-3 bg-white border border-blue-100 rounded-lg  hover:border-blue-300  hover:shadow-Input_Form1 ${
             field.value ? 'border-blue-300' : ''
           } `}
         >
