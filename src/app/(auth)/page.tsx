@@ -6,7 +6,7 @@ import LoginForm from '@/components/auth/form';
 export default async function Auth() {
   return (
     <div className="flex h-screen">
-      <div className="flex flex-col items-center w-1/2 bg-lightMode-colors-white bg-form-login-texture">
+      <div className="flex flex-col items-center justify-center w-1/2 bg-lightMode-colors-white bg-form-login-texture">
         <BannerCarousel />
       </div>
 

@@ -9,17 +9,15 @@ export const metadata: Metadata = {
 export default function HubLayout({ children }: { children: React.ReactNode }) {
   return (
     <body className="grid min-h-screen antialiased bg-cover grid-rows-app bg-hero-pattern">
-      <header className="fixed top-0 z-10 w-full">
-        <Header />
-      </header>
+      <Header />
 
-      <main className="mx-auto w-full max-w-[1600px] px-4 text-[#042F6C] mt-20 mb-0 overflow-y-auto">
+      <main className="mx-auto w-full max-w-[1600px] text-[#042F6C] mt-20 mb-10 ">
         {children}
       </main>
 
-      <footer className="fixed bottom-0 z-10 w-full px-4 mt-8 bg-white opacity-60">
-        <div className="flex items-center justify-between text-sm text-[#042F6C]">
-          <div className="flex gap-1 mb-2">
+      <footer className="fixed bottom-0 z-10 w-full px-4 mt-8 bg-white">
+        <div className="flex justify-between text-sm text-[#042F6C] opacity-50">
+          <div className="flex gap-1">
             <strong>SmartHub</strong>
             <span className="mx-1">•</span>
             <a

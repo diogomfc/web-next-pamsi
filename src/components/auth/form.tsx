@@ -58,39 +58,40 @@ export default function LoginForm() {
             />
           </div>
 
-          <form className="w-full" onSubmit={handleSubmit(handleSignIn)}>
-            <div className="mb-4">
-              <TextInput
-                type="email"
-                label="E-mail"
-                name="email"
-                defaultValue={''}
-                placeholder="E-mail"
-                register={register}
-                alert={formErrors.email ? formErrors.email.message : ''}
-                onFocus={handleInputFocus}
-              />
-            </div>
-            <div className="my-8">
-              <TextInput
-                type="password"
-                label="Password"
-                name="senha"
-                placeholder="Password"
-                defaultValue={''}
-                register={register}
-                alert={formErrors.senha ? formErrors.senha.message : ''}
-                onFocus={handleInputFocus}
-              />
-            </div>
+          <form
+            className="flex flex-col w-full gap-4"
+            onSubmit={handleSubmit(handleSignIn)}
+          >
+            <TextInput
+              type="email"
+              label="E-mail"
+              name="email"
+              defaultValue={''}
+              placeholder="E-mail"
+              register={register}
+              alert={formErrors.email ? formErrors.email.message : ''}
+              onFocus={handleInputFocus}
+            />
+
+            <TextInput
+              type="password"
+              label="Password"
+              name="senha"
+              placeholder="Password"
+              defaultValue={''}
+              register={register}
+              alert={formErrors.senha ? formErrors.senha.message : ''}
+              onFocus={handleInputFocus}
+            />
+
             {/* CheckBox para relembrar a senha */}
-            <div className="flex items-center mb-4">
+            {/* <div className="flex items-center mb-4">
               <input
                 type="checkbox"
                 className="w-4 h-4 mr-2 border border-gray-300 rounded-md text-lightMode-colors-blue-400 focus:ring-lightMode-colors-blue-400"
               />
               <label className="text-sm text-gray-500">Remember me</label>
-            </div>
+            </div> */}
             {authErrors.map((error) => (
               <span
                 key={error.message}
@@ -102,7 +103,7 @@ export default function LoginForm() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-8 mt-5 text-base font-semibold text-white rounded-md bg-lightMode-colors-blue-400 hover:bg-lightMode-colors-blue-300"
+              className="w-full py-8 mt-4 text-base font-semibold text-white rounded-md bg-lightMode-colors-blue-400 hover:bg-lightMode-colors-blue-300"
             >
               {isSubmitting ? (
                 <span className="pt-1">
@@ -120,7 +121,9 @@ export default function LoginForm() {
                 href="#"
                 className="text-sm font-light text-lightMode-colors-blue-400 hover:underline"
               >
-                Não possui conta? Crie uma agora!
+                <span className="flex gap-1">
+                  Não possui conta? <span>Solicite ao seu gerente.</span>
+                </span>
               </a>
             </div>
           </div>

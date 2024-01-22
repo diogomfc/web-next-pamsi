@@ -73,4 +73,26 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Funciona no Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #DFECF8 #EDF6FF;
+  }
+
+/* Funciona no Chrome, Edge e Safari */
+  *::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #DFECF8 
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #DFECF8;
+    border-radius: 20px;
+    border: 3px solid #DFECF8;
+  }
 }
+
+

@@ -66,34 +66,36 @@ export default function BannerCarousel() {
   }, [currentBanner]);
 
   return (
-    <div className="w-[500px] flex flex-col items-center text-center pt-10">
-      <h1 className="text-[40px]  text-lightMode-colors-blue-600">
-        Desvende a Eficiência com Nossa Plataforma
-      </h1>
-      <h1 className="text-[40px] text-lightMode-colors-blue-700">
-        Inteligente!
-      </h1>
+    <div className="flex flex-col items-center justify-center max-w-md gap-4 py-4 mx-auto text-center 2xl:max-w-[550px]">
+      <div className="">
+        <h1 className="text-3xl 2xl:text-4xl text-lightMode-colors-blue-600">
+          Desvende a Eficiência com Nossa Plataforma
+        </h1>
+        <h1 className="text-xl font-bold 2xl:text-2xl text-lightMode-colors-blue-700">
+          Inteligente!
+        </h1>
+      </div>
 
-      <div className="relative">
+      <div className="">
         <Image
           src={banners[currentBanner].image}
           alt={banners[currentBanner].title}
-          width={500}
+          width={300}
           height={300}
         />
+      </div>
 
-        <div className="absolute bottom-0 left-0 w-full">
-          <h1 className="text-xl font-bold text-lightMode-colors-blue-700">
-            {banners[currentBanner].title}
-          </h1>
-          <span className="text-base font-medium text-lightMode-colors-blue-700/70">
-            {banners[currentBanner].description}
-          </span>
-        </div>
+      <div className="h-20">
+        <h1 className="text-xl font-bold text-lightMode-colors-blue-700">
+          {banners[currentBanner].title}
+        </h1>
+        <span className="text-base font-medium text-lightMode-colors-blue-700/70">
+          {banners[currentBanner].description}
+        </span>
       </div>
 
       {/* Botões dinâmicos */}
-      <div className="flex justify-center pt-40">
+      <div className="flex justify-center ">
         {banners.map((banner, index) => (
           <button
             key={index}

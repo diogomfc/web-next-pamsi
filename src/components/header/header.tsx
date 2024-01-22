@@ -16,12 +16,31 @@ export function Header() {
   const { signOut } = useContext(AuthContext);
 
   return (
-    <header className="col-span-full flex h-[80px] items-center border border-transparent border-b-[#10bed5] bg-[#1D3150] pl-4 text-[rgb(177,199,223)] lg:h-[80px] lg:pr-8">
+    <header className="col-span-full flex h-[80px] items-center border border-transparent border-b-[#10bed5] bg-[#1D3150] pl-4 fixed top-0 z-50 w-full text-[rgb(177,199,223)] lg:h-[80px] lg:pr-8">
       <div className="flex items-center flex-shrink-0 mr-auto lg:gap-4">
-        <div className="flex w-[222px] flex-col items-center">
-          <HubMenu />
-        </div>
-        <Separator orientation="vertical" className="h-16 bg-[#20A6B9]/10" />
+        {pathname.includes('/hub') ? (
+          <>
+            {/* Logo */}
+            <div className="pl-4 overflow-hidden">
+              <Image
+                src="/img/smarthub.svg"
+                width={205}
+                height={28}
+                alt="logo"
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="pl-4 ">
+              <HubMenu />
+            </div>
+            <Separator
+              orientation="vertical"
+              className="h-16 bg-[#20A6B9]/10"
+            />
+          </>
+        )}
         <button className="transition-colors duration-300 hover:text-white">
           <div className="flex h-[40px] items-center gap-2">
             {pathname.includes('/averiguacao360') && (
@@ -42,7 +61,7 @@ export function Header() {
         </button>
       </div>
 
-      <div className="flex items-center gap-3 ml-auto lg:gap-4">
+      <div className="flex items-center gap-3 ml-auto mr-2 lg:gap-4">
         <AccountMenu />
 
         {/* Notificações */}

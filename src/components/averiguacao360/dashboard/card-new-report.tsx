@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -26,8 +24,8 @@ export function CardNewReport({
   qtd
 }: CardButtonProps) {
   return (
-    <>
-      <div className="flex flex-col justify-center bg-white border-8 item-center rounded-xl border-lightMode-colors-blue-100">
+    <div className="border rounded-md border-lightMode-colors-blue-200">
+      <div className="flex flex-col justify-center bg-white border-8 rounded-md item-center border-lightMode-colors-blue-100">
         <header className="flex items-center gap-2 p-4 bg-lightMode-colors-blue-100/50">
           <Image src={icon} alt="" width={20} height={20} />
           <h1 className="text-base">{title}</h1>
@@ -48,7 +46,7 @@ export function CardNewReport({
           </Link>
 
           <div className="flex flex-col items-center gap-4">
-            <h1 className="text-xl font-medium">{description}</h1>
+            <h1 className="text-lg font-bold">{description}</h1>
             <Dialog>
               <DialogTrigger asChild>
                 <Button className="px-2 py-1 border rounded text-lightMode-colors-blue-500 border-lightMode-colors-blue-300 bg-lightMode-colors-white hover:bg-lightMode-colors-blue-500 hover:text-white">
@@ -63,6 +61,6 @@ export function CardNewReport({
           </div>
         </main>
       </div>
-    </>
+    </div>
   );
 }

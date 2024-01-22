@@ -1,4 +1,4 @@
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
@@ -38,7 +38,9 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
             height={20}
             alt=""
           />
-          <h1 className="text-lg">Novo relatório de averiguação</h1>
+          <h1 className="text-lg text-lightMode-colors-blue-700">
+            Novo relatório de averiguação
+          </h1>
         </div>
         {/* <span className='pr-8 text-sm'>Etapa {step} de 3</span> */}
       </header>
@@ -95,29 +97,31 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
         <Separator className="h-1 bg-gradient-to-r from-white via-lightMode-colors-blue-200 to-white" />
         <div className="flex items-center justify-end gap-2 px-8 h-[60px] bg-lightMode-colors-blue-50">
           <Button
+            variant="ghost"
             disabled={activeStep === 0}
             onClick={handleBack}
-            className="flex items-center justify-center p-2 text-xs font-normal text-white border rounded-md bg-lightMode-colors-blue-300 hover:bg-lightMode-colors-blue-500 "
+            className="flex items-center gap-1 text-sm text-lightMode-colors-blue-700 hover:text-lightMode-colors-blue-600"
           >
-            Voltar
+            <ArrowLeft className="w-4 h-4 " />
+            <span>Voltar</span>
           </Button>
 
           {isLastStep ? (
             <Button
               type="submit"
               key="enviar"
-              className="flex items-center justify-center p-2 text-xs font-normal text-white border rounded-md bg-lightMode-colors-blue-300 hover:bg-lightMode-colors-blue-500 "
+              className="flex items-center justify-center p-2 text-sm font-normal text-white bg-blue-500 border rounded-md hover:bg-blue-600 "
             >
-              Enviar
+              Gerar relatório
             </Button>
           ) : (
             <Button
               type="button"
               key="proximo"
               onClick={handleNext}
-              className="flex items-center justify-center p-2 text-xs font-normal text-white border rounded-md bg-lightMode-colors-blue-300 hover:bg-lightMode-colors-blue-500 "
+              className="flex items-center justify-center p-2 text-sm font-normal text-white bg-blue-500 border rounded-md hover:bg-blue-600 "
             >
-              Próximo
+              Continuar
             </Button>
           )}
         </div>

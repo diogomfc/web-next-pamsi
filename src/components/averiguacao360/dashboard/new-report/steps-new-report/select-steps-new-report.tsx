@@ -149,7 +149,7 @@ export function SelectStepsNewReport() {
         </div>
         <div
           id="scroll-container"
-          className="space-y-4 max-h-[500px] overflow-y-auto"
+          className="space-y-4 max-h-[400px] overflow-y-auto"
         >
           {sections.map((section, index) => (
             <FormSwitch key={index} {...section} />

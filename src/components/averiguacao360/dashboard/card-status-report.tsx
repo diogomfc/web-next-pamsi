@@ -24,8 +24,8 @@ export function CardStatusReport({
   children
 }: CardStatusReportProps) {
   return (
-    <>
-      <div className="flex flex-col justify-center bg-white border-8 item-center rounded-xl borde border-lightMode-colors-blue-100">
+    <div className="border rounded-md border-lightMode-colors-blue-200">
+      <div className="flex flex-col justify-center bg-white border-8 rounded-md item-center borde border-lightMode-colors-blue-100">
         <header className="flex items-center gap-2 p-4 bg-lightMode-colors-blue-100/50">
           <Image src={icon} width={20} height={20} alt="" />
           <h1 className="text-base">{title}</h1>
@@ -35,7 +35,7 @@ export function CardStatusReport({
           {children}
         </main>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -67,7 +67,7 @@ export function ItemCardStatus({
         <span className="absolute">{qtd}</span>
       </div>
 
-      <span className="text-xl font-medium">{description}</span>
+      <span className="text-lg font-bold">{description}</span>
       <Link
         href={link}
         className={`px-2 py-1 border rounded ${

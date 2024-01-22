@@ -5,12 +5,12 @@ import * as z from 'zod';
 
 import { Form } from '@/components/ui/form';
 import { getCNPJData } from '@/services/get-cnpj';
-import { createReport } from '@/services/report-services';
 
+//import { createReport } from '@/services/report-services';
 import { ModelFormNewReport } from './model-form-new-report';
 import { BaseInfoNewReport } from './steps-new-report/base-info-new-report';
 import { SelectStepsNewReport } from './steps-new-report/select-steps-new-report';
-//import { SelectUsersNewReport } from './steps-new-report/select-users-new-report';
+import { SelectUsersNewReport } from './steps-new-report/select-users-new-report';
 
 const formSchema = z
   .object({
@@ -42,10 +42,12 @@ const formSchema = z
     form14_Resumo_Averiguacoes: z.boolean(),
     form15_Recuperacao_Carga: z.boolean(),
     form16_Anexos_Fotograficos: z.boolean(),
-    form17_Conclusao: z.boolean()
-    // analistas_responsaveis: z.string().min(8, {
-    //   message: 'Favor informar os analistas responsáveis.'
-    // })
+    form17_Conclusao: z.boolean(),
+    usuarios_permitidos: z
+      .array(z.string())
+      .refine((value) => value.some((item) => item), {
+        message: 'Selecione pelo menos um analista no grupo'
+      })
   })
   .required();
 
@@ -53,21 +55,39 @@ const sourceSteps = [
   {
     label: 'Informações básicas',
     Component: <BaseInfoNewReport />,
-    fields: ['n_processo', 'natureza_sinistro', 'cnpj', 'cliente_segurado'],
+    fields: ['numero_processo', 'natureza_sinistro', 'cnpj', 'cliente'],
     hasError: false
   },
   {
     label: 'Etapas do relatório',
     Component: <SelectStepsNewReport />,
-    fields: ['caracteristica_sinistro'],
+    fields: [
+      'form1_Cliente_Segurado',
+      'form2_Caracteristica_Sinistro',
+      'form3_Cronologia_Sinistro',
+      'form4_Do_Carregamento',
+      'form5_Motorista',
+      'form6_Ajudantes',
+      'form7_Veiculo_Transportador',
+      'form8_Orgao_Policial',
+      'form9_Gerenciamento_Risco_Veiculo',
+      'form10_Sistemas_Protecao_Carregamento',
+      'form11_Declaracao_Motorista_Ajudante',
+      'form12_Gerenciamento_Risco_Deposito',
+      'form13_Locais_Evento',
+      'form14_Resumo_Averiguacoes',
+      'form15_Recuperacao_Carga',
+      'form16_Anexos_Fotograficos',
+      'form17_Conclusao'
+    ],
+    hasError: false
+  },
+  {
+    label: 'Analistas Responsáveis',
+    Component: <SelectUsersNewReport />,
+    fields: ['usuarios_permitidos'],
     hasError: false
   }
-  // {
-  //   label: 'Analistas Responsáveis',
-  //   Component: <SelectUsersNewReport />,
-  //   fields: ['analistas_responsaveis'],
-  //   hasError: false
-  // }
 ];
 
 const getSteps = (errors: string[]) => {
@@ -88,7 +108,7 @@ export function FormGetNewReport() {
       numero_processo: '',
       cnpj: '',
       cliente: '',
-      form1_Cliente_Segurado: false,
+      form1_Cliente_Segurado: true,
       form2_Caracteristica_Sinistro: false,
       form3_Cronologia_Sinistro: false,
       form4_Do_Carregamento: false,
@@ -104,8 +124,8 @@ export function FormGetNewReport() {
       form14_Resumo_Averiguacoes: false,
       form15_Recuperacao_Carga: false,
       form16_Anexos_Fotograficos: false,
-      form17_Conclusao: false
-      //analistas_responsaveis: ''
+      form17_Conclusao: true,
+      usuarios_permitidos: []
     }
   });
 
@@ -147,7 +167,7 @@ export function FormGetNewReport() {
   const steps = getSteps(Object.keys(methods.formState.errors));
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Extrai os valores de form1_Cliente_Segurado e form2_Caracteristica_Sinistro
+    // Extrai os valores de formularios_selecionados
     const {
       form1_Cliente_Segurado,
       form2_Caracteristica_Sinistro,
@@ -224,10 +244,10 @@ export function FormGetNewReport() {
 
     // Adiciona o array aos valores do formulário
     const updatedValues = { ...values, formularios_selecionados };
-
+    console.log('Valores do formulário:', updatedValues);
     try {
-      const response = await createReport(updatedValues);
-      console.log('Relatório criado com sucesso:', response);
+      //const response = await createReport(updatedValues);
+      console.log('Relatório criado com sucesso:', updatedValues);
     } catch (error) {
       console.error('Erro ao criar relatório:', error);
     }

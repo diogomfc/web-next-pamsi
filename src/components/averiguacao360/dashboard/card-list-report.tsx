@@ -21,8 +21,8 @@ export function CardListReport({
   children
 }: CardListReportProps) {
   return (
-    <>
-      <div className="flex flex-col justify-center bg-white border-8 item-center rounded-xl borde border-lightMode-colors-blue-100">
+    <div className="border rounded-md border-lightMode-colors-blue-200">
+      <div className="flex flex-col justify-center bg-white border-8 rounded-md item-center borde border-lightMode-colors-blue-100">
         <header className="flex items-center justify-between gap-2 p-4 bg-lightMode-colors-blue-100/50">
           <div className="flex items-center gap-2">
             <Image
@@ -49,6 +49,6 @@ export function CardListReport({
           {children}
         </main>
       </div>
-    </>
+    </div>
   );
 }

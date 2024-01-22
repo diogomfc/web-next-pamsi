@@ -1,4 +1,3 @@
-import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import {
@@ -10,7 +9,7 @@ import {
 } from '@/components/ui/form';
 import { Switch } from '@/components/ui/switch';
 
-interface ReportItemProps {
+interface FormSwitchProps {
   name: string;
   label: string;
   description: string;
@@ -23,7 +22,7 @@ export function FormSwitch({
   description,
   name,
   disabled
-}: ReportItemProps) {
+}: FormSwitchProps) {
   const { control } = useFormContext();
 
   return (
@@ -32,23 +31,24 @@ export function FormSwitch({
       name={name}
       render={({ field }) => (
         <FormItem
-          className={`flex flex-row items-center justify-between p-3 bg-white border border-blue-100 rounded-lg shadow-Box_Form hover:border-blue-200 hover:bg-white hover:shadow-Input_Form1 hover:outline-none focus:border-blue-200 focus:bg-white focus:shadow-Input_Form1 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-50 focus-visible:ring-opacity-50 ${
-            field.value ? 'border-blue-200 bg-white shadow-Input_Form1' : ''
-          }}`}
+          className={`flex flex-row items-center justify-between pr-3 bg-white border border-blue-100 rounded-lg shadow-Box_Form hover:border-blue-300  hover:shadow-Input_Form1 ${
+            field.value ? 'border-blue-300' : ''
+          } `}
         >
-          <div className="space-y-0.5 hover:text-lightMode-colors-blue-400 ">
+          <div
+            onClick={() => field.onChange(!field.value)}
+            className={`group space-y-0.5 p-3 w-full cursor-pointer ${
+              field.value ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+            }`}
+          >
             <FormLabel
-              className={`text-base font-medium text-lightMode-colors-blue-400 cursor-pointer ${
-                field.value
-                  ? ''
-                  : 'text-slate-400 hover:text-lightMode-colors-blue-400'
+              className={`text-base group-hover:text-lightMode-colors-blue-400 font-medium text-lightMode-colors-blue-400 cursor-pointer ${
+                field.value ? '' : 'text-slate-400 '
               }`}
             >
               {label}
             </FormLabel>
-            <FormDescription className={`${field.value ? '' : 'opacity-75'}`}>
-              {description}
-            </FormDescription>
+            <FormDescription>{description}</FormDescription>
           </div>
           <FormControl>
             <Switch

@@ -13,16 +13,16 @@ export default function Averiguacao360Layout({
 }) {
   return (
     <body className="grid min-h-screen antialiased bg-cover grid-rows-app bg-hero-pattern">
-      <header className="fixed top-0 z-10 w-full">
+      <header className="fixed top-0 z-50 w-full">
         <Header />
       </header>
 
-      <main className="mx-auto w-full max-w-[1600px] px-4 text-[#042F6C] mt-20 mb-0 overflow-y-auto">
+      <main className="mx-auto w-full max-w-[1600px] px-4 text-[#042F6C] mt-20 mb-10 overflow-y-auto">
         {children}
       </main>
 
-      <footer className="fixed bottom-0 z-10 w-full px-4 mt-8 bg-white opacity-60">
-        <div className="flex items-center justify-between text-sm text-[#042F6C]">
+      <footer className="fixed bottom-0 z-10 w-full px-4 mt-8 bg-white ">
+        <div className="flex items-center justify-between text-sm text-[#042F6C] opacity-50">
           <div className="flex gap-1 mb-2">
             <strong>SmartHub</strong>
             <span className="mx-1">•</span>
