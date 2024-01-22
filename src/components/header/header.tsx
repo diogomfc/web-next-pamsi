@@ -16,7 +16,7 @@ export function Header() {
   const { signOut } = useContext(AuthContext);
 
   return (
-    <header className="col-span-full flex h-[80px] items-center border border-transparent border-b-[#10bed5] bg-[#1D3150] pl-4 fixed top-0 z-50 w-full text-[rgb(177,199,223)] lg:h-[80px] lg:pr-8">
+    <header className="col-span-full flex h-[60px] items-center border border-transparent border-b-[#10bed5] bg-[#1D3150] pl-4 fixed top-0 z-50 w-full text-[rgb(177,199,223)] lg:h-[60px] lg:pr-8">
       <div className="flex items-center flex-shrink-0 mr-auto lg:gap-4">
         {pathname.includes('/hub') ? (
           <>
@@ -37,7 +37,7 @@ export function Header() {
             </div>
             <Separator
               orientation="vertical"
-              className="h-16 bg-[#20A6B9]/10"
+              className="h-12 bg-[#20A6B9]/10"
             />
           </>
         )}

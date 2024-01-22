@@ -17,10 +17,10 @@ export function HubMenu() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className=" flex bg-transparent border-0 rounded-none hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent  m-0 p-0 w-full h-full cursor-pointer">
-            <div className="flex flex-col items-center w-[222px] h-[80px] justify-end mb-1">
+          <NavigationMenuTrigger className=" flex bg-transparent border-0 rounded-none hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent  m-0 p-0 w-full h-12 cursor-pointer">
+            <div className="flex flex-col items-center w-[222px] h-[60px] justify-end mb-[2px]">
               {/* Logo */}
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
                 <div className="overflow-hidden ">
                   <Image
                     src="/img/smarthub.svg"
@@ -40,10 +40,10 @@ export function HubMenu() {
             </div>
           </NavigationMenuTrigger>
 
-          <NavigationMenuContent className="bg-lightMode-colors-blue-50/10">
+          <NavigationMenuContent className="">
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               <NavLink href="/averiguacao360">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 ">
                   <div>
                     <Image
                       src="/img/navigation/icons/icon-link-averiguacao360.svg"
@@ -62,7 +62,7 @@ export function HubMenu() {
               </NavLink>
               <NavLink href="#">
                 <div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 ">
                     <div>
                       <Image
                         src="/img/navigation/icons/icon-link-seach-pro.svg"

@@ -1,77 +1,32 @@
 //import { CheckboxItem } from '../checkbox-item';
 import { ArrowDown } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { BeatLoader } from 'react-spinners';
+
+import { AuthContext } from '@/contexts/AuthContext';
+import userService from '@/services/users-services';
+import { Usuario } from '@/types/userTypes';
 
 import { FormCheckBox } from '../form-checkbox';
 
-const usersResponsaveis = [
-  {
-    id: '01c09901-b606-419c-bcb4-a975117e35f1',
-    nome: 'Analista',
-    email: 'analista@analista.com',
-    funcao: 'Analista',
-    telefone: '11-98110-1705',
-    avatar: 'c0e5d0ec62a67e0f5b31-Avatar3.png',
-    criado_em: '25-10-2023 16:34:19'
-  },
-  {
-    id: '25d6ecb2-d43d-44a8-a4f5-7b02df37fb9b',
-    nome: 'Davi Lucca',
-    email: 'davi@analista.com',
-    funcao: 'Analista',
-    telefone: '11-2525-2525',
-    avatar: '1b963d75b9366482eb06-HandlerImageDocs.gif',
-    criado_em: '25-10-2023 16:45:29'
-  },
-  {
-    id: '57b3d959-d13f-41d0-992b-e8afc257db58',
-    nome: 'Admin Pamcary',
-    email: 'admin@admin.com',
-    funcao: 'Admin',
-    telefone: '11-9999-9999',
-    avatar: 'b0599ac1bff1257de0fd-HandlerImageDocs.gif',
-    criado_em: '25-10-2023 16:30:05'
-  },
-  {
-    id: '25d6ecb2-d43d-44a8-a4f5-7b02df37fb9b',
-    nome: 'Davi Lucca',
-    email: 'davi@analista.com',
-    funcao: 'Analista',
-    telefone: '11-2525-2525',
-    avatar: '1b963d75b9366482eb06-HandlerImageDocs.gif',
-    criado_em: '25-10-2023 16:45:29'
-  },
-  {
-    id: '57b3d959-d13f-41d0-992b-e8afc257db58',
-    nome: 'Admin Pamcary',
-    email: 'admin@admin.com',
-    funcao: 'Admin',
-    telefone: '11-9999-9999',
-    avatar: 'b0599ac1bff1257de0fd-HandlerImageDocs.gif',
-    criado_em: '25-10-2023 16:30:05'
-  },
-  {
-    id: '25d6ecb2-d43d-44a8-a4f5-7b02df37fb9b',
-    nome: 'Davi Lucca',
-    email: 'davi@analista.com',
-    funcao: 'Analista',
-    telefone: '11-2525-2525',
-    avatar: '1b963d75b9366482eb06-HandlerImageDocs.gif',
-    criado_em: '25-10-2023 16:45:29'
-  },
-  {
-    id: '57b3d959-d13f-41d0-992b-e8afc257db58',
-    nome: 'Admin Pamcary',
-    email: 'admin@admin.com',
-    funcao: 'Admin',
-    telefone: '11-9999-9999',
-    avatar: 'b0599ac1bff1257de0fd-HandlerImageDocs.gif',
-    criado_em: '25-10-2023 16:30:05'
-  }
-];
-
 export function SelectUsersNewReport() {
+  const { usuario } = useContext(AuthContext);
   const [isScrollable, setIsScrollable] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userData, setUserData] = useState<Usuario[]>([]);
+
+  useEffect(() => {
+    const requestAllUsers = async () => {
+      setIsLoading(true);
+      const allUsersResponse = await userService.getAllUsers();
+      const otherUsersFilter = await allUsersResponse.filter(
+        (user: Usuario) => user.id !== usuario?.id
+      );
+      setUserData(otherUsersFilter);
+      setIsLoading(false);
+    };
+    requestAllUsers();
+  }, [usuario?.id]);
 
   useEffect(() => {
     const container = document.getElementById('scroll-container');
@@ -112,7 +67,12 @@ export function SelectUsersNewReport() {
           id="scroll-container"
           className="space-y-2 max-h-[300px] overflow-y-auto"
         >
-          {usersResponsaveis.map((user) => (
+          {isLoading && (
+            <div className="flex items-center justify-center w-full h-32">
+              <BeatLoader color="#BDD7F1" />
+            </div>
+          )}
+          {userData.map((user) => (
             <FormCheckBox
               key={user.id}
               name_form="usuarios_permitidos"

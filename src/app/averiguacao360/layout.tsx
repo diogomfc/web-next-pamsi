@@ -17,7 +17,7 @@ export default function Averiguacao360Layout({
         <Header />
       </header>
 
-      <main className="mx-auto w-full max-w-[1600px] px-4 text-[#042F6C] mt-20 mb-10 overflow-y-auto">
+      <main className="mx-auto w-full max-w-[1600px] px-4 text-[#042F6C] mt-14 mb-10 overflow-y-auto">
         {children}
       </main>
 

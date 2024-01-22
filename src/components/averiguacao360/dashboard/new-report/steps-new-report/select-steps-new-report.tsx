@@ -5,7 +5,7 @@ import { FormSwitch } from '../form-switch';
 
 export interface componentProps {}
 
-const sections = [
+const forms = [
   {
     name: 'form1_Cliente_Segurado',
     label: 'Segurado',
@@ -151,8 +151,8 @@ export function SelectStepsNewReport() {
           id="scroll-container"
           className=" space-y-2 max-h-[300px] overflow-y-auto"
         >
-          {sections.map((section, index) => (
-            <FormSwitch key={index} {...section} />
+          {forms.map((form, index) => (
+            <FormSwitch key={index} {...form} />
           ))}
         </div>
         <div className="flex items-center justify-center w-full h-2 text-lightMode-colors-blue-200 ">

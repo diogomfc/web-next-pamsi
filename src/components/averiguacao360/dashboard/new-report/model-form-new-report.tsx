@@ -109,7 +109,7 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
             <Button
               type="submit"
               key="enviar"
-              className="flex items-center justify-center p-2 text-sm font-normal text-white bg-blue-500 border rounded-md hover:bg-blue-600 "
+              className="px-2 py-1 text-white border rounded bg-lightMode-colors-blue-500 hover:bg-lightMode-colors-blue-400 "
             >
               Gerar relatório
             </Button>
@@ -118,7 +118,7 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
               type="button"
               key="proximo"
               onClick={handleNext}
-              className="flex items-center justify-center p-2 text-sm font-normal text-white bg-blue-500 border rounded-md hover:bg-blue-600 "
+              className="px-2 py-1 text-white border rounded bg-lightMode-colors-blue-500 hover:bg-lightMode-colors-blue-400 "
             >
               Continuar
             </Button>

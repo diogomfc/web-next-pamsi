@@ -18,7 +18,7 @@ export function BaseInfoNewReport() {
       <FormInput
         name="numero_processo"
         label="Número do processo"
-        description="Insira o número do processo gerado pela torre de operações."
+        description="Insira o número do processo gerado pela torre de operações"
         placeholder="Número do processo"
       />
       <FormRadioGroup
@@ -33,14 +33,14 @@ export function BaseInfoNewReport() {
       <FormInput
         name="cnpj"
         label="CNPJ"
-        description="Insira o CNPJ."
+        description="Insira o CNPJ do segurado"
         placeholder="CNPJ"
         rightIcon={<Search />}
       />
       <FormInput
         name="cliente"
         label="Segurado"
-        description="Insira o nome completo do cliente segurado."
+        description="Insira o nome completo do cliente segurado"
         placeholder="Segurado"
       />
     </div>

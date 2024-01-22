@@ -94,7 +94,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers.authorization = `Bearer ${token}`;
 
       setCookie(undefined, 'sh.token', token, {
-        maxAge: 60 * 60 * 1 // 1 hour
+        maxAge: 60 * 60 * 24 // 1 dia
       });
 
       // Após a autenticação, carregue o perfil do usuário

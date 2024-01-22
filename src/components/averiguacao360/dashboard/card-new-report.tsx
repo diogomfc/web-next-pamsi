@@ -34,7 +34,7 @@ export function CardNewReport({
         <main className="flex flex-col items-center justify-center min-h-[220px] gap-4">
           <Link
             href={link}
-            className="box-border relative flex flex-col items-center p-4 rounded-lg bg-lightMode-colors-blue-100"
+            className="box-border relative flex flex-col items-center p-4 rounded-lg bg-lightMode-colors-blue-50"
           >
             <Image src={icon} alt="" width={50} height={50} />
 

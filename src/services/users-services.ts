@@ -1,22 +1,26 @@
 import { api } from '@/data/api';
 
-export interface Usuario {
-  id: string;
-  nome: string;
-  email: string;
-  telefone: string;
-  avatar: string;
-  funcao: string;
-  criado_em: string;
+async function getUserById(id: string) {
+  try {
+    const userResponse = await api.get(`/usuarios/${id}`);
+    return userResponse.data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-async function getUsuarios(id: string) {
-  const response = await api.get(`/usuarios/${id}`);
-  return response.data;
+async function getAllUsers() {
+  try {
+    const usersResponse = await api.get('/usuarios');
+    return usersResponse.data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-const UserService = {
-  getUsuarios
+const userService = {
+  getUserById,
+  getAllUsers
 };
 
-export default UserService;
+export default userService;

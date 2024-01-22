@@ -59,7 +59,9 @@ export default function LoginForm() {
           </div>
 
           <form
-            className="flex flex-col w-full gap-4"
+            className={`flex flex-col w-full gap-4 ${
+              isSubmitting && 'opacity-50'
+            }`}
             onSubmit={handleSubmit(handleSignIn)}
           >
             <TextInput
@@ -71,6 +73,7 @@ export default function LoginForm() {
               register={register}
               alert={formErrors.email ? formErrors.email.message : ''}
               onFocus={handleInputFocus}
+              disabled={isSubmitting}
             />
 
             <TextInput
@@ -82,6 +85,7 @@ export default function LoginForm() {
               register={register}
               alert={formErrors.senha ? formErrors.senha.message : ''}
               onFocus={handleInputFocus}
+              disabled={isSubmitting}
             />
 
             {/* CheckBox para relembrar a senha */}

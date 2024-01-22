@@ -11,6 +11,7 @@ import { ModelFormNewReport } from './model-form-new-report';
 import { BaseInfoNewReport } from './steps-new-report/base-info-new-report';
 import { SelectStepsNewReport } from './steps-new-report/select-steps-new-report';
 import { SelectUsersNewReport } from './steps-new-report/select-users-new-report';
+import { SubmitSuccessfulNewReport } from './steps-new-report/submit-successful-new-report';
 
 const formSchema = z
   .object({
@@ -151,17 +152,7 @@ export function FormGetNewReport() {
   }, [cnpj, setValue]);
 
   if (methods.formState.isSubmitSuccessful) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full">
-        <h1 className="text-2xl font-semibold text-lightMode-colors-blue-400">
-          Relatório criado com sucesso!
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          Agora você pode adicionar os analistas responsáveis e as etapas do
-          relatório.
-        </p>
-      </div>
-    );
+    return <SubmitSuccessfulNewReport />;
   }
 
   const steps = getSteps(Object.keys(methods.formState.errors));

@@ -11,7 +11,7 @@ export default function HubLayout({ children }: { children: React.ReactNode }) {
     <body className="grid min-h-screen antialiased bg-cover grid-rows-app bg-hero-pattern">
       <Header />
 
-      <main className="mx-auto w-full max-w-[1600px] text-[#042F6C] mt-20 mb-10 ">
+      <main className="mx-auto w-full max-w-[1600px] text-[#042F6C] mt-16 mb-10 ">
         {children}
       </main>
 
