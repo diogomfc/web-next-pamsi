@@ -5,5 +5,5 @@ export interface UserType {
   telefone: string;
   avatar: string;
   funcao: string;
-  criado_em: string;
+  criado_em?: string;
 }

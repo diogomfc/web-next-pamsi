@@ -3,7 +3,8 @@ import Link from 'next/link';
 
 export interface CardStepStatusReportProps {
   description: string;
-  status: 'Formalizando' | 'Finalizado' | 'Aprovado' | 'Rejeitado' | 'Emitido';
+  status: 'Revisao' | 'Aprovado' | 'Emitido' | 'Corrigir';
+
   qtd: number;
   link: string;
 }
@@ -28,14 +29,14 @@ export function CardStepStatusReport({
                   width={180}
                   alt="Status Report aprovado"
                 />
-                <div className="relative top-8 shadow-sm shadow-lightMode-colors-green-400 rounded-full h-[80px] w-[80px] bg-white border border-lightMode-colors-blue-100 p-[2px] flex items-center justify-center">
+                <div className="relative top-8 shadow-sm shadow-[#20A6B9] rounded-full h-[80px] w-[80px] bg-white border border-lightMode-colors-blue-100 p-[2px] flex items-center justify-center">
                   <span className="text-3xl font-semibold text-lightMode-colors-blue-700">
                     {qtd}
                   </span>
                 </div>
               </>
             )}
-            {status === 'Rejeitado' && (
+            {status === 'Corrigir' && (
               <>
                 <Image
                   src="/img/averiguacao360/imgs/img-status-report-correcao.svg"
@@ -51,16 +52,16 @@ export function CardStepStatusReport({
                 </div>
               </>
             )}
-            {status === 'Formalizando' && (
+            {status === 'Revisao' && (
               <>
                 <Image
-                  src="/img/averiguacao360/imgs/img-status-report-formalizacao.svg"
+                  src="/img/averiguacao360/imgs/img-status-report-revisao.svg"
                   className="absolute"
                   height={180}
                   width={180}
-                  alt="Status Report formalização"
+                  alt="Reports em revisao"
                 />
-                <div className="relative top-8 shadow-sm shadow-lightMode-colors-blue-700 rounded-full h-[80px] w-[80px] bg-light border border-lightMode-colors-blue-100 p-[2px] flex items-center justify-center">
+                <div className="relative top-8 shadow-sm shadow-[#FFA000] rounded-full h-[80px] w-[80px] bg-light border border-lightMode-colors-blue-100 p-[2px] flex items-center justify-center">
                   <span className="text-3xl font-semibold ">{qtd}</span>
                 </div>
               </>
@@ -72,7 +73,7 @@ export function CardStepStatusReport({
                   className="absolute"
                   height={180}
                   width={180}
-                  alt="Status Report revisão"
+                  alt="Status Report Emitido"
                 />
                 <div className="relative top-8 shadow-sm shadow-lightMode-colors-blue-300 rounded-full h-[80px] w-[80px] bg-light border border-lightMode-colors-blue-100 p-[2px] flex items-center justify-center">
                   <span className="text-3xl font-semibold">{qtd}</span>
@@ -88,10 +89,10 @@ export function CardStepStatusReport({
               href={link}
               className={`px-2 py-1 border rounded bg-white hover:text-white ${
                 status === 'Aprovado'
-                  ? ' text-lightMode-colors-green-500 border-lightMode-colors-green-500  hover:bg-lightMode-colors-green-500'
-                  : status === 'Formalizando'
-                    ? 'text-lightMode-colors-blue-700 border-lightMode-colors-blue-700  hover:bg-lightMode-colors-blue-700'
-                    : status === 'Rejeitado'
+                  ? ' text-[#20A6B9] border-[#20A6B9] hover:bg-[#20A6B9]'
+                  : status === 'Revisao'
+                    ? 'text-[#FFA000] border-[#FFA000]  hover:bg-[#FFA000]'
+                    : status === 'Corrigir'
                       ? 'text-lightMode-colors-red-default border-lightMode-colors-red-default hover:bg-lightMode-colors-red-default'
                       : 'text-lightMode-colors-blue-500 border-lightMode-colors-blue-300 hover:bg-lightMode-colors-blue-500'
               }`}

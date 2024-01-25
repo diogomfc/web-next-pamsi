@@ -10,6 +10,7 @@ import {
   HoverCardTrigger
 } from '@/components/ui/hover-card';
 import { TableCell, TableRow } from '@/components/ui/table';
+import { AvatarbaseURL } from '@/env';
 import { UserType } from '@/types/userTypes';
 
 import { ProgressStatus } from './progress-status';
@@ -43,10 +44,12 @@ export function CardTableRow({
   return (
     <>
       <TableRow className="">
-        <TableCell className="pl-4">{status_report}</TableCell>
+        <TableCell className="pl-4 ">
+          <div className="bg-lightMode-colors-blue-100">{status_report}</div>
+        </TableCell>
         <TableCell className="">
           <div className="flex flex-col justify-center">
-            <h1 className="font-semibold truncate w-[220px]">{cliente}</h1>
+            <h1 className="font-semibold truncate w-[220px] ">{cliente}</h1>
             <span className="text-xs text-muted-foreground">
               Nº {numero_processo}
             </span>
@@ -82,33 +85,39 @@ export function CardTableRow({
             </span>
           </div>
         </TableCell>
-        <TableCell className="flex items-center justify-center gap-2">
+        <TableCell className="flex items-center justify-center">
           {/* Menu */}
           <HoverCard>
             <HoverCardTrigger
               asChild
               className="w-auto h-auto p-2 rounded-md cursor-pointer hover:bg-lightMode-colors-blue-100"
             >
-              <UsersRound size={24} strokeWidth={1.5} />
+              <UsersRound size={20} strokeWidth={1.5} />
             </HoverCardTrigger>
-            <HoverCardContent className="w-auto grid-cols-2 p-4 border rounded-lg border-lightMode-colors-blue-200">
+            <HoverCardContent
+              align="end"
+              className="w-auto grid-cols-2 p-4 border rounded-lg border-lightMode-colors-blue-200"
+            >
               <div className="flex flex-col gap-4">
-                <div className="flex gap-4">
-                  <Image
-                    src="/img/averiguacao360/icons/icon-relatorio.svg"
-                    width={30}
-                    height={30}
-                    alt="Relatório"
-                  />
-                  <div className="flex flex-col ">
-                    <h1 className="font-semibold">{cliente}</h1>
+                <div className="flex items-center gap-4">
+                  <div className="bg-lightMode-colors-blue-100">
+                    <Image
+                      src="/img/averiguacao360/icons/icon-relatorio.svg"
+                      width={30}
+                      height={30}
+                      alt="Relatório"
+                    />
+                  </div>
+
+                  <div className="flex flex-col item center ">
                     <span className="text-xs text-muted-foreground">
-                      {numero_processo}
+                      Processo
                     </span>
+                    <h1 className="font-semibold">Nº {numero_processo}</h1>
                   </div>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <span className="text-xs text-muted-foreground ">
+                  <span className="text-xs font-semibold ">
                     Grupo responsável pela averiguação
                   </span>
                   <div className="flex flex-col gap-2">
@@ -116,13 +125,13 @@ export function CardTableRow({
                       return (
                         <div
                           key={usuario.id}
-                          className="flex items-center justify-between gap-4 p-4 border rounded-lg border-lightMode-colors-blue-200 bg-lightMode-colors-blue-50"
+                          className="flex items-center justify-between gap-2 p-2 border rounded-lg border-lightMode-colors-blue-100 bg-lightMode-colors-blue-50/30"
                         >
-                          <div className="flex gap-4">
+                          <div className="flex gap-2">
                             <Avatar>
                               {usuario.avatar && (
                                 <AvatarImage
-                                  src={`${process.env.NEXT_PUBLIC_API_URL}/images/avatar/${usuario.avatar}`}
+                                  src={`${AvatarbaseURL}/images/avatar/${usuario.avatar}`}
                                   alt="Avatar"
                                 />
                               )}
@@ -134,13 +143,13 @@ export function CardTableRow({
                               </AvatarFallback>
                             </Avatar>
                             <div className="flex flex-col">
-                              <span>{usuario.nome}</span>
+                              <span className="text-xs">{usuario.nome}</span>
                               <span className="text-xs font-normal text-muted-foreground">
                                 {usuario.funcao}
                               </span>
                             </div>
                           </div>
-                          <div className="flex gap-4">
+                          <div className="flex gap-2">
                             <div className="flex items-center justify-center w-auto h-auto p-2 bg-white border rounded-full border-lightMode-colors-blue-200 hover:bg-lightMode-colors-blue-100 hover:border-lightMode-colors-blue-300 hover:text-lightMode-colors-blue-400">
                               <HoverCard>
                                 <HoverCardTrigger
@@ -181,7 +190,7 @@ export function CardTableRow({
               asChild
               className="w-auto h-auto p-2 rounded-md cursor-pointer hover:bg-lightMode-colors-blue-100"
             >
-              <FilePenLine size={24} strokeWidth={1.5} />
+              <FilePenLine size={20} strokeWidth={1.5} />
             </HoverCardTrigger>
             <HoverCardContent className="w-auto h-auto ">
               <span className="text-muted-foreground ">Editar relatório</span>

@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, RefreshCcw } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -11,6 +11,7 @@ export interface CardListReportProps {
   icon: string;
   qtd?: number;
   link: string;
+  loadReports: () => void;
   children: React.ReactNode;
 }
 
@@ -18,6 +19,7 @@ export function CardListReport({
   title,
   icon,
   link,
+  loadReports,
   children
 }: CardListReportProps) {
   return (
@@ -33,6 +35,12 @@ export function CardListReport({
               height={25}
             />
             <h1 className="text-base">{title}</h1>
+            <RefreshCcw
+              size={16}
+              aria-label="Atualizar"
+              className="transition-transform duration-500 ease-in-out cursor-pointer hover:transform hover:rotate-180 hover:opacity-50"
+              onClick={loadReports}
+            />
           </div>
           <div className="flex gap-4">
             <Link

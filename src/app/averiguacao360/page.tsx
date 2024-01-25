@@ -32,58 +32,54 @@ export default function Dashboard() {
   });
 
   // Busca todos os relatórios
+  // useEffect(() => {
+  //   const requestAllReports = async () => {
+  //     setIsLoading(true);
+  //     const allReportResponse = await reportService.getAllReport();
+
+  //     setAllReport(allReportResponse);
+
+  //     setIsLoading(false);
+  //   };
+  //   requestAllReports();
+  // }, [usuario]);
+
+  const requestAllReports = async () => {
+    setIsLoading(true);
+    const allReportResponse = await reportService.getAllReport();
+
+    setAllReport(allReportResponse);
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    const requestAllReports = async () => {
-      setIsLoading(true);
-      const allReportResponse = await reportService.getAllReport();
-
-      // const filteredReports = allReportResponse.relatorio_filtrado.filter(
-      //   (report: ReportDataType) => {
-      //     if (usuario?.funcao === 'Admin' || usuario?.funcao === 'Supervisor') {
-      //       return true;
-      //     } else if (
-      //       usuario?.funcao === 'Analista' ||
-      //       usuario?.funcao === 'Revisor'
-      //     ) {
-      //       return report.relatorio_filtrado.some(
-      //         (user) => user.usuario_responsavel.id === usuario?.id
-      //       );
-      //     } else {
-      //       return false;
-      //     }
-      //   }
-      // );
-
-      // setAllReport({
-      //   ...allReportResponse
-      //   relatorio_filtrado: filteredReports
-      // });
-
-      setAllReport(allReportResponse);
-
-      setIsLoading(false);
-    };
     requestAllReports();
   }, [usuario]);
 
   //Quantidade de relatorios em formalização
-  const qtdFormalizando = allReport?.relatorio_filtrado.filter(
-    (report) => report.status === 'Formalizando'
-  ).length;
-
-  //Quantidade de relatorios em emissão
-  const qtdEmitido = allReport?.relatorio_filtrado.filter(
-    (report) => report.status === 'Emitido'
-  ).length;
+  // const qtdFormalizando = allReport?.relatorio_filtrado.filter(
+  //   (report) => report.status === 'Formalizando'
+  // ).length;
 
   //Quantidade de relatorios aprovados
   const qtdAprovado = allReport?.relatorio_filtrado.filter(
     (report) => report.status === 'Aprovado'
   ).length;
 
-  //Quantidade de relatorios rejeitados
-  const qtdRejeitado = allReport?.relatorio_filtrado.filter(
-    (report) => report.status === 'Rejeitado'
+  //Quantidade de relatorios emitidos
+  const qtdEmitido = allReport?.relatorio_filtrado.filter(
+    (report) => report.status === 'Emitido'
+  ).length;
+
+  //Quantidade de relatorios revisao
+  const qtdRevisao = allReport?.relatorio_filtrado.filter(
+    (report) => report.status === 'Revisao'
+  ).length;
+
+  //Quantidade de relatorios corrigir
+  const qtdCorrigir = allReport?.relatorio_filtrado.filter(
+    (report) => report.status === 'Corrigir'
   ).length;
 
   //Quantidade de relatorios recuperados
@@ -168,13 +164,14 @@ export default function Dashboard() {
               title="Meus relatórios"
               icon="/img/averiguacao360/icons/icon-relatorio-list.svg"
               link="/averiguacao360/list-reports"
+              loadReports={requestAllReports}
             >
               {allReport ? (
                 <Table className="">
                   <TableHeader>
                     <TableRow className="">
                       <TableHead className="w-[80px]"></TableHead>
-                      <TableHead className="w-[400px]">Segurado</TableHead>
+                      <TableHead className="w-[300px]">Segurado</TableHead>
                       <TableHead className="w-[140px] text-center">
                         Progresso
                       </TableHead>
@@ -198,37 +195,44 @@ export default function Dashboard() {
                             report.status === 'Formalizando' ? (
                               <Image
                                 src="/img/averiguacao360/icons/icon-relatorio.svg"
-                                alt="formalizando"
-                                width={40}
-                                height={40}
+                                alt="Formalizando"
+                                width={20}
+                                height={20}
                               />
-                            ) : report.status === 'Finalizado' ? (
+                            ) : report.status === 'Emitido' ? (
                               <Image
                                 src="/img/averiguacao360/icons/icon-relatorio-finalizado.svg"
-                                alt="finalizado"
-                                width={40}
-                                height={40}
+                                alt="Emitido"
+                                width={20}
+                                height={20}
                               />
                             ) : report.status === 'Aprovado' ? (
                               <Image
                                 src="/img/averiguacao360/icons/icon-relatorio-aprovado.svg"
                                 alt="Aprovado"
-                                width={40}
-                                height={40}
+                                width={20}
+                                height={20}
                               />
-                            ) : report.status === 'Rejeitado' ? (
+                            ) : report.status === 'Corrigir' ? (
                               <Image
                                 src="/img/averiguacao360/icons/icon-relatorio-correcao.svg"
-                                alt="Rejeitado"
-                                width={40}
-                                height={40}
+                                alt="Corrigir"
+                                width={20}
+                                height={20}
                               />
-                            ) : report.status === 'Emitido' ? (
+                            ) : report.status === 'Recuperado' ? (
                               <Image
-                                src="/img/averiguacao360/icons/icon-relatorio-formalizacao.svg"
-                                alt="Emitido"
-                                width={40}
-                                height={40}
+                                src="/img/averiguacao360/icons/icon-relatorio-recuperado.svg"
+                                alt="Recuperado"
+                                width={20}
+                                height={20}
+                              />
+                            ) : report.status === 'Irreversivel' ? (
+                              <Image
+                                src="/img/averiguacao360/icons/icon-relatorio-irreversivel.svg"
+                                alt="Irreversivel"
+                                width={20}
+                                height={20}
                               />
                             ) : null
                           }
@@ -278,37 +282,41 @@ export default function Dashboard() {
 
         {/* Cards Step Status */}
         <section className="grid grid-cols-12 gap-5">
-          <div className="col-span-3">
+          <div className="relative col-span-3">
             <CardStepStatusReport
-              description="Relatórios em processo de formalização"
-              status="Formalizando"
-              qtd={qtdFormalizando ?? 0}
-              link="/averiguacao360/aprovados"
+              description="Relatórios em processo de Revisão"
+              status="Revisao"
+              qtd={qtdRevisao ?? 0}
+              link="/averiguacao360/revisao"
             />
+            {isLoading && <CardLoader />}
           </div>
-          <div className="col-span-3">
+          <div className="relative col-span-3">
             <CardStepStatusReport
               description="Relatórios aprovados para emissão"
               status="Aprovado"
               qtd={qtdAprovado ?? 0}
               link="/averiguacao360/aprovados"
             />
+            {isLoading && <CardLoader />}
           </div>
-          <div className="col-span-3">
+          <div className="relative col-span-3">
             <CardStepStatusReport
               description="Relatórios emitidos"
               status="Emitido"
               qtd={qtdEmitido ?? 0}
-              link="/averiguacao360/aprovados"
+              link="/averiguacao360/emitidos"
             />
+            {isLoading && <CardLoader />}
           </div>
-          <div className="col-span-3">
+          <div className="relative col-span-3">
             <CardStepStatusReport
               description="Relatórios retornados para correção"
-              status="Rejeitado"
-              qtd={qtdRejeitado ?? 0}
-              link="/averiguacao360/aprovados"
+              status="Corrigir"
+              qtd={qtdCorrigir ?? 0}
+              link="/averiguacao360/corrigir"
             />
+            {isLoading && <CardLoader />}
           </div>
         </section>
       </main>

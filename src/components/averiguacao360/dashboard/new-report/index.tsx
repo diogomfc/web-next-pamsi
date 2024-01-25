@@ -6,6 +6,7 @@ import * as z from 'zod';
 import { Form } from '@/components/ui/form';
 import { AuthContext } from '@/contexts/AuthContext';
 import { getCNPJData } from '@/services/get-cnpj';
+import reportService from '@/services/report-services';
 import userService from '@/services/users-services';
 import { Tipo_Formulario } from '@/types/reportTypes';
 import { UserType } from '@/types/userTypes';
@@ -15,6 +16,7 @@ import { BaseInfoNewReport } from './steps-new-report/base-info-new-report';
 import { SelectFormsNewReport } from './steps-new-report/select-forms-new-report';
 import { SelectUsersNewReport } from './steps-new-report/select-users-new-report';
 import { SubmitSuccessfulNewReport } from './steps-new-report/submit-successful-new-report';
+import { SubmittingNewReport } from './steps-new-report/submitting-new-report';
 
 const formSchema = z
   .object({
@@ -135,7 +137,6 @@ export function FormGetNewReport() {
 
   // useState para armazenar todos os usuários e usuários selecionados
   const [allUsers, setAllUsers] = useState<UserType[]>([]);
-  // const [groupUsersSelected, setGroupUsersSelected] = useState<UserType[]>([]);
 
   // Método do react-hook-form
   const methods = useForm<z.infer<typeof formSchema>>({
@@ -151,9 +152,6 @@ export function FormGetNewReport() {
   const grupo_usuarios_permitidos = allUsers.filter((user) =>
     idObjects.some((obj) => obj.id === user.id)
   );
-  // console.log('Objeto ID', idObjects);
-  // console.log('Todos Usuários:', allUsers);
-  console.log('Grupo Averiguação:', grupo_usuarios_permitidos);
 
   //Função para buscar todos os usuários
   useEffect(() => {
@@ -198,7 +196,7 @@ export function FormGetNewReport() {
     }
   }, [cnpj, setValue]);
 
-  // Verifica se o formulário foi submetido com sucesso e exibe mensagem de sucesso
+  // Verifica se o formulário foi submetido com sucesso e retorna o componente de sucesso
   if (methods.formState.isSubmitSuccessful) {
     const { formSelected } = extractSelectedForms(methods.getValues());
 
@@ -245,6 +243,10 @@ export function FormGetNewReport() {
     );
   }
 
+  if (methods.formState.isSubmitting) {
+    return <SubmittingNewReport />;
+  }
+
   const formSteps = sourceSteps;
 
   // Função de submissão de criação de relatório
@@ -254,15 +256,11 @@ export function FormGetNewReport() {
       (item) => item.idFormName
     );
 
-    //const usuarios_permitidos = values.usuarios_permitidos;
-    //console.log('Usuários permitidos:', usuarios_permitidos);
-
     const updatedValues = { ...values, formularios_selecionados };
-    //console.log('Valores do formulário:', updatedValues);
 
     try {
-      //const response = await createReport(updatedValues);
-      console.log('Relatório criado com sucesso:', updatedValues);
+      const response = await reportService.createReport(updatedValues);
+      console.log('Relatório criado com sucesso:', response);
     } catch (error) {
       console.error('Erro ao criar relatório:', error);
     }

@@ -33,8 +33,8 @@ export function AccountMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger className=" flex bg-transparent border-0 rounded-none hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent  m-0 p-0 w-full h-full cursor-pointer">
             {/* Perfil */}
-            <div className="flex group cursor-pointer items-center gap-3 rounded-3xl border border-transparent bg-[#22385B] pr-3 transition-colors duration-300 hover:border-[#51A6E3]/20   hover:text-white">
-              <Avatar>
+            <div className="flex group cursor-pointer items-center gap-3 rounded-3xl border border-transparent bg-[#22385B] pr-3 transition-colors duration-300 hover:border-[#51A6E3]/20  hover:border-l-0 hover:text-white">
+              <Avatar className=" p-1 bg-[#1D3150] group-hover:border-[#51A6E3]/20 border border-[#51A6E3]/10">
                 {avatarName && (
                   <AvatarImage
                     src={`${AvatarbaseURL}/images/avatar/${avatarName}`}
@@ -43,7 +43,7 @@ export function AccountMenu() {
                 )}
                 <AvatarFallback
                   title={usuario?.nome}
-                  className="cursor-pointer group-hover:border-[#20A6B9] border border-[#20A6B9]/10 bg-[#22385B]"
+                  className="p-1 bg-[#1D3150] group-hover:border-[#51A6E3]/20 border border-[#51A6E3]/20"
                 >
                   {/* {usuario?.nome.charAt(0).toUpperCase()} */}
                   <User size={20} />
@@ -62,7 +62,7 @@ export function AccountMenu() {
             </div>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-2  md:w-[200px] lg:w-[400px] lg:grid-cols-[.75fr_1fr]">
+            <ul className="grid gap-1  md:w-[200px] lg:w-[365px] lg:grid-cols-[1fr_1fr]">
               <li className="">
                 <NavigationMenuLink asChild>
                   <a
@@ -70,7 +70,7 @@ export function AccountMenu() {
                     href="/"
                   >
                     <div className="flex flex-col items-center justify-center gap-4 ">
-                      <Avatar className="h-[95px] w-[95px]">
+                      <Avatar className="h-[95px] w-[95px] p-1 bg-[#1D3150] group-hover:border-[#51A6E3]/20 border border-[#51A6E3]/10">
                         {avatarName && (
                           <AvatarImage
                             src={`${AvatarbaseURL}/images/avatar/${avatarName}`}
@@ -79,7 +79,7 @@ export function AccountMenu() {
                         )}
                         <AvatarFallback
                           title={usuario?.nome}
-                          className="cursor-pointer border border-[#20A6B9]/10 bg-[#22385B]"
+                          className="p-1 bg-[#1D3150] group-hover:border-[#51A6E3]/20 border border-[#51A6E3]/10"
                         >
                           <User
                             size={40}
@@ -102,23 +102,30 @@ export function AccountMenu() {
                 </NavigationMenuLink>
               </li>
               <li className="py-4">
-                <Button variant="ghost">
+                <Button
+                  variant="ghost"
+                  className="cursor-default hover:bg-transparent"
+                >
                   <div className="flex items-center gap-1">
                     <Mail size={14} />
                     <span className="text-xs ">{usuario?.email}</span>
                   </div>
                 </Button>
-                <Button variant="ghost">
+                <Button
+                  variant="ghost"
+                  className="cursor-default hover:bg-transparent"
+                >
                   <div className="flex items-center gap-1">
                     <Building size={14} />
                     <span className="text-xs ">GPS Pamcary</span>
                   </div>
                 </Button>
-                <Button variant="ghost">
-                  <div className="flex items-center gap-1">
-                    <UserRoundCog size={14} />
-                    <span className="text-xs ">Editar Perfil</span>
-                  </div>
+                <Button
+                  variant="ghost"
+                  className="flex items-center gap-1 transition-colors duration-300 hover:bg-transparent hover:text-lightMode-colors-blue-300"
+                >
+                  <UserRoundCog size={14} />
+                  <span className="text-xs ">Editar Perfil</span>
                 </Button>
               </li>
             </ul>
