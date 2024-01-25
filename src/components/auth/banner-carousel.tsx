@@ -11,40 +11,40 @@ const banners: Banner[] = [
   {
     image: '/img/banners/logo-averiguação360.svg',
     title: 'Averiguação360',
-    description: 'Relatórios Personalizados para Decisões Eficientes.'
+    description: 'Relatórios personalizados para decisões eficientes.'
   },
   {
-    image: '/img/banners/logo-cargasafe.svg',
+    image: '/img/banners/logo-cargasafe1.svg',
     title: 'CargaSafe',
     description:
-      'Transformando Dados em Rotas Seguras. Sua Aliada Contra Roubos de Carga.'
+      'Transformando dados em rotas seguras. Sua aliada contra roubos de carga.'
   },
   {
-    image: '/img/banners/logo-cargoguardian.svg',
+    image: '/img/banners/logo-cargoguardian1.svg',
     title: 'CargoGuardian',
     description:
-      'A Inteligência Artificial a Serviço da Recuperação Eficiente de Cargas'
+      'A inteligência artificial a serviço da recuperação eficiente de cargas.'
   },
   {
-    image: '/img/banners/logo-clientbase.svg',
+    image: '/img/banners/logo-clientbase1.svg',
     title: 'ClientBase',
     description:
-      'Armazena de forma segura e organizada informações vitais sobre seus clientes'
+      'Armazena de forma segura e organizada informações vitais sobre seus clientes.'
   },
   {
-    image: '/img/banners/logo-maplink.svg',
+    image: '/img/banners/logo-maplink1.svg',
     title: 'MapLink',
-    description: 'A Integração que Mapeia o Caminho para Decisões Estratégicas.'
+    description: 'A integração que mapeia o caminho para decisões estratégicas.'
   },
   {
-    image: '/img/banners/logo-safelogix.svg',
+    image: '/img/banners/logo-safelogix1.svg',
     title: 'SafeLogix',
-    description: 'Mapeando a Segurança com Históricos Detalhados.'
+    description: 'Cadastro de motorista com históricos detalhados.'
   },
   {
-    image: '/img/banners/logo-seachpro.svg',
+    image: '/img/banners/logo-seachpro1.svg',
     title: 'SearchPro',
-    description: 'O Seu Atalho para Informações Inteligentes e Rápidas.'
+    description: 'O seu atalho para informações inteligentes e rápidas.'
   }
 ];
 
@@ -69,7 +69,7 @@ export default function BannerCarousel() {
     <div className="flex flex-col items-center justify-center max-w-md gap-4 py-4 mx-auto text-center 2xl:max-w-[550px]">
       <div className="">
         <h1 className="text-3xl 2xl:text-4xl text-lightMode-colors-blue-600">
-          Desvende a Eficiência com Nossa Plataforma
+          Desvende a eficiência com nossa plataforma
         </h1>
         <h1 className="text-xl font-bold 2xl:text-2xl text-lightMode-colors-blue-700">
           Inteligente!

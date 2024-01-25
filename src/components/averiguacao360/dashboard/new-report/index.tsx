@@ -1,15 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { Form } from '@/components/ui/form';
+import { AuthContext } from '@/contexts/AuthContext';
 import { getCNPJData } from '@/services/get-cnpj';
+import userService from '@/services/users-services';
+import { Tipo_Formulario } from '@/types/reportTypes';
+import { UserType } from '@/types/userTypes';
 
-//import { createReport } from '@/services/report-services';
 import { ModelFormNewReport } from './model-form-new-report';
 import { BaseInfoNewReport } from './steps-new-report/base-info-new-report';
-import { SelectStepsNewReport } from './steps-new-report/select-steps-new-report';
+import { SelectFormsNewReport } from './steps-new-report/select-forms-new-report';
 import { SelectUsersNewReport } from './steps-new-report/select-users-new-report';
 import { SubmitSuccessfulNewReport } from './steps-new-report/submit-successful-new-report';
 
@@ -52,190 +55,211 @@ const formSchema = z
   })
   .required();
 
+const defaultFormValues = {
+  numero_processo: '',
+  cnpj: '',
+  cliente: '',
+  form1_Cliente_Segurado: true,
+  form2_Caracteristica_Sinistro: false,
+  form3_Cronologia_Sinistro: false,
+  form4_Do_Carregamento: false,
+  form5_Motorista: false,
+  form6_Ajudantes: false,
+  form7_Veiculo_Transportador: false,
+  form8_Orgao_Policial: false,
+  form9_Gerenciamento_Risco_Veiculo: false,
+  form10_Sistemas_Protecao_Carregamento: false,
+  form11_Declaracao_Motorista_Ajudante: false,
+  form12_Gerenciamento_Risco_Deposito: false,
+  form13_Locais_Evento: false,
+  form14_Resumo_Averiguacoes: false,
+  form15_Recuperacao_Carga: false,
+  form16_Anexos_Fotograficos: false,
+  form17_Conclusao: true,
+  usuarios_permitidos: []
+};
+
+// extração dos formulários selecionados de forma dinâmica
+const createFormSelected = (formValues: Tipo_Formulario) => {
+  const formSelected = Object.keys(formValues)
+    .filter(
+      (key) =>
+        key.startsWith('form') && formValues[key as keyof Tipo_Formulario]
+    )
+    .map((key) => {
+      const formNumberMatch = key.match(/\d+/);
+      const formNumber = formNumberMatch ? parseInt(formNumberMatch[0], 10) : 0;
+      const formName = key
+        .replace(/_/g, ' ')
+        .replace('form', '')
+        .replace(/\d+/g, '')
+        .trim();
+      return {
+        idFormName: key,
+        NumberForm: formNumber,
+        formName: formName
+      };
+    });
+
+  return { formSelected };
+};
+
+const extractSelectedForms = (values: Tipo_Formulario) => {
+  return createFormSelected(values);
+};
+
+// fonte de dados para os passos do formulário
 const sourceSteps = [
   {
     label: 'Informações básicas',
     Component: <BaseInfoNewReport />,
-    fields: ['numero_processo', 'natureza_sinistro', 'cnpj', 'cliente'],
-    hasError: false
+    fields: ['numero_processo', 'natureza_sinistro', 'cnpj', 'cliente']
   },
   {
     label: 'Formulários do relatório',
-    Component: <SelectStepsNewReport />,
+    Component: <SelectFormsNewReport />,
     fields: [
-      'form1_Cliente_Segurado',
-      'form2_Caracteristica_Sinistro',
-      'form3_Cronologia_Sinistro',
-      'form4_Do_Carregamento',
-      'form5_Motorista',
-      'form6_Ajudantes',
-      'form7_Veiculo_Transportador',
-      'form8_Orgao_Policial',
-      'form9_Gerenciamento_Risco_Veiculo',
-      'form10_Sistemas_Protecao_Carregamento',
-      'form11_Declaracao_Motorista_Ajudante',
-      'form12_Gerenciamento_Risco_Deposito',
-      'form13_Locais_Evento',
-      'form14_Resumo_Averiguacoes',
-      'form15_Recuperacao_Carga',
-      'form16_Anexos_Fotograficos',
-      'form17_Conclusao'
-    ],
-    hasError: false
+      'formularios_selecionados',
+      ...Object.keys(defaultFormValues).filter((key) => key.startsWith('form'))
+    ]
   },
   {
     label: 'Grupo investigativo',
     Component: <SelectUsersNewReport />,
-    fields: ['usuarios_permitidos'],
-    hasError: false
+    fields: ['usuarios_permitidos']
   }
-];
-
-const getSteps = (errors: string[]) => {
-  return sourceSteps.map((step) => {
-    return {
-      ...step,
-      hasError: errors.some((error) => step.fields.includes(error))
-    };
-  });
-};
+].map((step) => ({ ...step, hasError: false }));
 
 export function FormGetNewReport() {
+  const { usuario } = useContext(AuthContext);
+
+  // useState para armazenar todos os usuários e usuários selecionados
+  const [allUsers, setAllUsers] = useState<UserType[]>([]);
+  // const [groupUsersSelected, setGroupUsersSelected] = useState<UserType[]>([]);
+
+  // Método do react-hook-form
   const methods = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     criteriaMode: 'all',
     mode: 'all',
-    defaultValues: {
-      numero_processo: '',
-      cnpj: '',
-      cliente: '',
-      form1_Cliente_Segurado: true,
-      form2_Caracteristica_Sinistro: false,
-      form3_Cronologia_Sinistro: false,
-      form4_Do_Carregamento: false,
-      form5_Motorista: false,
-      form6_Ajudantes: false,
-      form7_Veiculo_Transportador: false,
-      form8_Orgao_Policial: false,
-      form9_Gerenciamento_Risco_Veiculo: false,
-      form10_Sistemas_Protecao_Carregamento: false,
-      form11_Declaracao_Motorista_Ajudante: false,
-      form12_Gerenciamento_Risco_Deposito: false,
-      form13_Locais_Evento: false,
-      form14_Resumo_Averiguacoes: false,
-      form15_Recuperacao_Carga: false,
-      form16_Anexos_Fotograficos: false,
-      form17_Conclusao: true,
-      usuarios_permitidos: []
-    }
+    defaultValues: defaultFormValues
   });
 
+  //Busca no getValues os id dos usuários selecionados
+  const id_usuarios_permitidos = methods.getValues('usuarios_permitidos');
+  const idObjects = id_usuarios_permitidos.map((id) => ({ id }));
+  const grupo_usuarios_permitidos = allUsers.filter((user) =>
+    idObjects.some((obj) => obj.id === user.id)
+  );
+  // console.log('Objeto ID', idObjects);
+  // console.log('Todos Usuários:', allUsers);
+  console.log('Grupo Averiguação:', grupo_usuarios_permitidos);
+
+  //Função para buscar todos os usuários
+  useEffect(() => {
+    const fetchUsuariosPermitidos = async () => {
+      try {
+        const data = await userService.getAllUsers();
+        //filtro todos os usuário e removo o usuário logado
+        const usuariosPermitidos = data.filter(
+          (user: UserType) => user.id !== usuario?.id
+        );
+        setAllUsers(usuariosPermitidos);
+      } catch (error) {
+        console.error('Erro ao obter usuários permitidos:', error);
+      }
+    };
+    fetchUsuariosPermitidos();
+  }, [usuario]);
+
+  //Busca de CNPJ
   const { watch, setValue } = methods;
   const cnpj = watch('cnpj');
   const cnpjRef = useRef(cnpj);
 
   useEffect(() => {
-    cnpjRef.current = cnpj;
-    if (cnpj) {
-      getCNPJData({ cnpj }).then((data) => {
+    const fetchCNPJData = async () => {
+      try {
+        const data = await getCNPJData({ cnpj });
         if (cnpjRef.current === cnpj) {
-          if (data && data.razao_social) {
-            setValue('cliente', data.razao_social);
-          } else {
-            setValue('cliente', '');
-          }
+          setValue('cliente', data?.razao_social || '');
         }
-      });
+      } catch (error) {
+        console.error('Erro ao obter dados do CNPJ:', error);
+      }
+    };
+
+    cnpjRef.current = cnpj;
+
+    if (cnpj) {
+      fetchCNPJData();
     } else {
       setValue('cliente', '');
     }
   }, [cnpj, setValue]);
 
+  // Verifica se o formulário foi submetido com sucesso e exibe mensagem de sucesso
   if (methods.formState.isSubmitSuccessful) {
-    return <SubmitSuccessfulNewReport />;
+    const { formSelected } = extractSelectedForms(methods.getValues());
+
+    // Ordena formSelected por NumberForm
+    const newFormSelected = formSelected.sort(
+      (a, b) => a.NumberForm - b.NumberForm
+    );
+
+    return (
+      <>
+        <SubmitSuccessfulNewReport
+          numero_processo={methods.getValues('numero_processo')}
+          cliente={methods.getValues('cliente')}
+          data_entrada={new Date().toISOString()}
+          usuario_responsavel={{
+            id: usuario?.id || '',
+            nome: usuario?.nome || '',
+            email: usuario?.email || '',
+            telefone: usuario?.telefone || '',
+            avatar: usuario?.avatar || '',
+            funcao: usuario?.funcao || '',
+            criado_em: usuario?.criado_em || ''
+          }}
+          usuarios_permitidos={
+            grupo_usuarios_permitidos.map((user) => ({
+              id: user.id,
+              nome: user.nome,
+              email: user.email,
+              telefone: user.telefone,
+              avatar: user.avatar,
+              funcao: user.funcao,
+              criado_em: user.criado_em
+            })) || []
+          }
+          formularios_selecionados={newFormSelected.map((form, index) => {
+            return {
+              idFormName: form.idFormName,
+              formName: form.formName,
+              step: index + 1
+            };
+          })}
+        />
+      </>
+    );
   }
 
-  const steps = getSteps(Object.keys(methods.formState.errors));
+  const formSteps = sourceSteps;
 
+  // Função de submissão de criação de relatório
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Extrai os valores de formularios_selecionados
-    const {
-      form1_Cliente_Segurado,
-      form2_Caracteristica_Sinistro,
-      form3_Cronologia_Sinistro,
-      form4_Do_Carregamento,
-      form5_Motorista,
-      form6_Ajudantes,
-      form7_Veiculo_Transportador,
-      form8_Orgao_Policial,
-      form9_Gerenciamento_Risco_Veiculo,
-      form10_Sistemas_Protecao_Carregamento,
-      form11_Declaracao_Motorista_Ajudante,
-      form12_Gerenciamento_Risco_Deposito,
-      form13_Locais_Evento,
-      form14_Resumo_Averiguacoes,
-      form15_Recuperacao_Carga,
-      form16_Anexos_Fotograficos,
-      form17_Conclusao
-    } = values;
+    const { formSelected } = extractSelectedForms(values);
+    const formularios_selecionados = formSelected.map(
+      (item) => item.idFormName
+    );
 
-    // Cria um array com os formulários selecionados
-    const formularios_selecionados = [];
-    if (form1_Cliente_Segurado) {
-      formularios_selecionados.push('form1_Cliente_Segurado');
-    }
-    if (form2_Caracteristica_Sinistro) {
-      formularios_selecionados.push('form2_Caracteristica_Sinistro');
-    }
-    if (form3_Cronologia_Sinistro) {
-      formularios_selecionados.push('form3_Cronologia_Sinistro');
-    }
-    if (form4_Do_Carregamento) {
-      formularios_selecionados.push('form4_Do_Carregamento');
-    }
-    if (form5_Motorista) {
-      formularios_selecionados.push('form5_Motorista');
-    }
-    if (form6_Ajudantes) {
-      formularios_selecionados.push('form6_Ajudantes');
-    }
-    if (form7_Veiculo_Transportador) {
-      formularios_selecionados.push('form7_Veiculo_Transportador');
-    }
-    if (form8_Orgao_Policial) {
-      formularios_selecionados.push('form8_Orgao_Policial');
-    }
-    if (form9_Gerenciamento_Risco_Veiculo) {
-      formularios_selecionados.push('form9_Gerenciamento_Risco_Veiculo');
-    }
-    if (form10_Sistemas_Protecao_Carregamento) {
-      formularios_selecionados.push('form10_Sistemas_Protecao_Carregamento');
-    }
-    if (form11_Declaracao_Motorista_Ajudante) {
-      formularios_selecionados.push('form11_Declaracao_Motorista_Ajudante');
-    }
-    if (form12_Gerenciamento_Risco_Deposito) {
-      formularios_selecionados.push('form12_Gerenciamento_Risco_Deposito');
-    }
-    if (form13_Locais_Evento) {
-      formularios_selecionados.push('form13_Locais_Evento');
-    }
-    if (form14_Resumo_Averiguacoes) {
-      formularios_selecionados.push('form14_Resumo_Averiguacoes');
-    }
-    if (form15_Recuperacao_Carga) {
-      formularios_selecionados.push('form15_Recuperacao_Carga');
-    }
-    if (form16_Anexos_Fotograficos) {
-      formularios_selecionados.push('form16_Anexos_Fotograficos');
-    }
-    if (form17_Conclusao) {
-      formularios_selecionados.push('form17_Conclusao');
-    }
+    //const usuarios_permitidos = values.usuarios_permitidos;
+    //console.log('Usuários permitidos:', usuarios_permitidos);
 
-    // Adiciona o array aos valores do formulário
     const updatedValues = { ...values, formularios_selecionados };
-    console.log('Valores do formulário:', updatedValues);
+    //console.log('Valores do formulário:', updatedValues);
+
     try {
       //const response = await createReport(updatedValues);
       console.log('Relatório criado com sucesso:', updatedValues);
@@ -247,7 +271,7 @@ export function FormGetNewReport() {
   return (
     <Form {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)} className="">
-        <ModelFormNewReport items={steps} />
+        <ModelFormNewReport items={formSteps} />
       </form>
     </Form>
   );

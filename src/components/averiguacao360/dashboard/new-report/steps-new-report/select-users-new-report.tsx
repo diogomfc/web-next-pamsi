@@ -1,11 +1,10 @@
-//import { CheckboxItem } from '../checkbox-item';
 import { ArrowDown } from 'lucide-react';
 import { useContext, useEffect, useState } from 'react';
 import { BeatLoader } from 'react-spinners';
 
 import { AuthContext } from '@/contexts/AuthContext';
 import userService from '@/services/users-services';
-import { Usuario } from '@/types/userTypes';
+import { UserType } from '@/types/userTypes';
 
 import { FormCheckBox } from '../form-checkbox';
 
@@ -13,14 +12,14 @@ export function SelectUsersNewReport() {
   const { usuario } = useContext(AuthContext);
   const [isScrollable, setIsScrollable] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [userData, setUserData] = useState<Usuario[]>([]);
+  const [userData, setUserData] = useState<UserType[]>([]);
 
   useEffect(() => {
     const requestAllUsers = async () => {
       setIsLoading(true);
       const allUsersResponse = await userService.getAllUsers();
       const otherUsersFilter = await allUsersResponse.filter(
-        (user: Usuario) => user.id !== usuario?.id
+        (user: UserType) => user.id !== usuario?.id
       );
       setUserData(otherUsersFilter);
       setIsLoading(false);

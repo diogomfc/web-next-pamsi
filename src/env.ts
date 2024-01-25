@@ -1,7 +1,11 @@
-import { z } from 'zod';
+// import { z } from 'zod';
 
-const encSchema = z.object({
-  NEXT_PUBLIC_API_URL_RENDER: z.string().url()
-});
+// const encSchema = z.object({
+//   NEXT_PUBLIC_API_URL_RENDER: z.string().url(),
+//   NEXT_PUBLIC_API_URL: z.string().url(),
+//   NODE_ENV: z.string()
+// });
 
-export const env = encSchema.parse(process.env);
+export const AvatarbaseURL = 'http://localhost:3333';
+
+// export const env = encSchema.parse(process.env);

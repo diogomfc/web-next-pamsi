@@ -17,7 +17,7 @@ function hasPermission(userRole: UserRole, roles: UserRole[]) {
 export default function Hub() {
   const { usuario } = useContext(AuthContext);
   return (
-    <div className="grid h-full grid-cols-12 gap-8 px-8 pt-4 ">
+    <div className="grid h-full grid-cols-12 gap-8 px-12 pt-4 ">
       <header className="flex flex-col col-span-12 gap-2 ">
         <h1 className="text-3xl font-medium">
           Bem-vindo, <strong>{usuario?.nome}</strong>
@@ -46,7 +46,7 @@ export default function Hub() {
                   <Card
                     image="/img/hub/iconAveriguacao360.png"
                     title="Averiguação360"
-                    description="Gestão Inteligente de Averiguações"
+                    description="Gestão inteligente de averiguações"
                     buttonLabel={
                       <Link
                         href="/averiguacao360"
@@ -65,7 +65,7 @@ export default function Hub() {
                           </div>
 
                           <span className="text-sm text-lightMode-colors-blue-700">
-                            Gestão Inteligente de Averiguações
+                            Gestão inteligente de averiguações
                           </span>
                         </div>
 
@@ -86,7 +86,7 @@ export default function Hub() {
                   <Card
                     image="/img/hub/iconSearchPro.png"
                     title="SearchPro"
-                    description="Pesquisa Inteligente"
+                    description="Pesquisa inteligente"
                     buttonLabel={
                       <Button
                         disabled
@@ -110,7 +110,7 @@ export default function Hub() {
                           </div>
 
                           <span className="text-sm text-lightMode-colors-blue-700">
-                            Sua Busca Inteligente
+                            Sua busca inteligente
                           </span>
                         </div>
 
@@ -130,7 +130,7 @@ export default function Hub() {
                   <Card
                     image="/img/hub/iconCargaSafe.png"
                     title="CargaSafe"
-                    description="Mapeamento Inteligente contra Roubos"
+                    description="Mapeamento inteligente contra Roubos"
                     buttonLabel={
                       <Button
                         disabled
@@ -154,7 +154,7 @@ export default function Hub() {
                           </div>
 
                           <span className="text-sm text-lightMode-colors-blue-700">
-                            Mapeamento Inteligente contra Roubos
+                            Mapeamento inteligente contra roubos
                           </span>
                         </div>
 
@@ -176,7 +176,7 @@ export default function Hub() {
                   <Card
                     image="/img/hub/iconMapLink.png"
                     title="MapLink"
-                    description="Integração Estratégica de Dados"
+                    description="Integração estratégica de dados"
                     buttonLabel={
                       <Button
                         disabled
@@ -200,7 +200,7 @@ export default function Hub() {
                           </div>
 
                           <span className="text-sm text-lightMode-colors-blue-700">
-                            Integração Estratégica de Dados
+                            Integração estratégica de dados
                           </span>
                         </div>
 
@@ -223,9 +223,9 @@ export default function Hub() {
               <section className="grid grid-cols-12 gap-5">
                 <div className="col-span-3">
                   <Card
-                    image="/img/hub/iconClientBase.png"
+                    image="/img/hub/iconClientBase.svg"
                     title="ClientBase"
-                    description="Gestão de Clientes Simplificada"
+                    description="Gestão de clientes simplificada"
                     buttonLabel={
                       <Button
                         disabled
@@ -249,7 +249,7 @@ export default function Hub() {
                           </div>
 
                           <span className="text-sm text-lightMode-colors-blue-700">
-                            Gestão de Clientes Simplificada
+                            Gestão de clientes simplificada
                           </span>
                         </div>
 
@@ -269,55 +269,9 @@ export default function Hub() {
 
                 <div className="col-span-3">
                   <Card
-                    image="/img/hub/iconConfig.png"
-                    title="Configurações"
-                    description="Cadastro e gerenciamento de acesso"
-                    buttonLabel={
-                      <Button
-                        disabled
-                        className="gap-2 px-2 py-1 border rounded text-lightMode-colors-blue-500 border-lightMode-colors-blue-300/50 bg-lightMode-colors-white"
-                      >
-                        <Lock size={16} />
-                        <span>Em breve</span>
-                      </Button>
-                    }
-                    popoverContent={
-                      <div className="flex flex-col gap-4 ">
-                        <div className="text-start">
-                          <div className="flex gap-4">
-                            <h2 className="text-xl font-bold font text-lightMode-colors-blue-700">
-                              CargaSafe
-                            </h2>
-                            <div className="flex items-center gap-2 text-sm text-center text-lightMode-colors-orange/70">
-                              <Lock size={16} />
-                              <span>Em breve</span>
-                            </div>
-                          </div>
-
-                          <span className="text-sm text-lightMode-colors-blue-700">
-                            Mapeamento Inteligente contra Roubos
-                          </span>
-                        </div>
-
-                        <p className="text-sm text-start text-lightMode-colors-blue-700/70">
-                          Ferramenta revolucionária de mapeamento de roubos de
-                          carga. Com base em dados de registros de boletins de
-                          ocorrência, ele permite a identificação das áreas de
-                          maior incidência de roubo de carga, capacitando
-                          investigações mais inteligentes e precisas. Proteja
-                          sua carga e tome decisões informadas com o poder do
-                          mapeamento de rotas.
-                        </p>
-                      </div>
-                    }
-                  />
-                </div>
-
-                <div className="col-span-3">
-                  <Card
                     image="/img/hub/iconSafeLogix.png"
                     title="SafeLogix"
-                    description="Registro Seguro de Motoristas e Ajudantes em Sinistros"
+                    description="Cadastro de motoristas e ajudantes"
                     buttonLabel={
                       <Button
                         disabled
@@ -341,8 +295,7 @@ export default function Hub() {
                           </div>
 
                           <span className="text-sm text-lightMode-colors-blue-700">
-                            Registro Seguro de Motoristas e Ajudantes em
-                            Sinistros
+                            Cadastro de motorista com históricos detalhados
                           </span>
                         </div>
 
@@ -366,7 +319,7 @@ export default function Hub() {
                   <Card
                     image="/img/hub/iconCargoGuardian.png"
                     title="CargoGuardian"
-                    description="Inteligência na Recuperação de Carga"
+                    description="Inteligência na recuperação de carga"
                     buttonLabel={
                       <Button
                         disabled
@@ -390,7 +343,7 @@ export default function Hub() {
                           </div>
 
                           <span className="text-sm text-lightMode-colors-blue-700">
-                            Inteligência na Recuperação de Carga
+                            Inteligência na recuperação de carga
                           </span>
                         </div>
 

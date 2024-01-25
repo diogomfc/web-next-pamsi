@@ -16,7 +16,7 @@ export default function HubLayout({ children }: { children: React.ReactNode }) {
       </main>
 
       <footer className="fixed bottom-0 z-10 w-full px-4 mt-8 bg-white">
-        <div className="flex justify-between text-sm text-[#042F6C] opacity-50">
+        <div className="flex justify-between text-xs text-[#042F6C] opacity-50">
           <div className="flex gap-1">
             <strong>SmartHub</strong>
             <span className="mx-1">•</span>

@@ -51,7 +51,7 @@ export default function LoginForm() {
         <div className="flex flex-col items-center w-full p-10 border-8 rounded-lg border-lightMode-colors-blue-100">
           <div className="mb-10">
             <Image
-              src="../../img/logo.svg"
+              src="/img/logo-pam-shub-login.svg"
               alt="Logo Pamcary SI"
               width={300}
               height={200}

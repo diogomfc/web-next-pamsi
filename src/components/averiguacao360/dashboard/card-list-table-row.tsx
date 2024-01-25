@@ -10,7 +10,7 @@ import {
   HoverCardTrigger
 } from '@/components/ui/hover-card';
 import { TableCell, TableRow } from '@/components/ui/table';
-import { UsuarioResponsavel } from '@/types/reportTypes';
+import { UserType } from '@/types/userTypes';
 
 import { ProgressStatus } from './progress-status';
 
@@ -20,7 +20,7 @@ type CardTableRowProps = {
   cliente: string;
   data_entrada: string;
   usuario_responsavel?: string;
-  usuarios_perfil: UsuarioResponsavel[];
+  usuarios_perfil: UserType[];
   qtd_etapas_formulario: number;
 };
 
@@ -122,7 +122,7 @@ export function CardTableRow({
                             <Avatar>
                               {usuario.avatar && (
                                 <AvatarImage
-                                  src={`http://localhost:3333/images/avatar/${usuario.avatar}`}
+                                  src={`${process.env.NEXT_PUBLIC_API_URL}/images/avatar/${usuario.avatar}`}
                                   alt="Avatar"
                                 />
                               )}

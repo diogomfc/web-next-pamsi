@@ -1,24 +1,24 @@
-export enum Tipo_Formulario {
-  form1_Cliente_Segurado,
-  form2_Caracteristica_Sinistro,
-  form3_Cronologia_Sinistro,
-  form4_Do_Carregamento,
-  form5_Motorista,
-  form6_Ajudantes,
-  form7_Veiculo_Transportador,
-  form8_Orgao_Policial,
-  form9_Gerenciamento_Risco_Veiculo,
-  form10_Sistemas_Protecao_Carregamento,
-  form11_Declaracao_Motorista_Ajudante,
-  form12_Gerenciamento_Risco_Deposito,
-  form13_Locais_Evento,
-  form14_Resumo_Averiguacoes,
-  form15_Recuperacao_Carga,
-  form16_Anexos_Fotograficos,
-  form17_Conclusao
+export enum FormularioTipoType {
+  ClienteSegurado,
+  CaracteristicaSinistro,
+  CronologiaSinistro,
+  Carregamento,
+  Motorista,
+  Ajudantes,
+  VeiculoTransportador,
+  OrgaoPolicial,
+  GerenciamentoRiscoVeiculo,
+  SistemasProtecaoCarregamento,
+  DeclaracaoMotoristaAjudante,
+  GerenciamentoRiscoDeposito,
+  LocaisEvento,
+  ResumoAveriguacoes,
+  RecuperacaoCarga,
+  AnexosFotograficos,
+  Conclusao
 }
 
-export enum Status_Relatorio {
+export enum RelatorioStatusType {
   Formalizando,
   Finalizado,
   Aprovado,
@@ -28,14 +28,14 @@ export enum Status_Relatorio {
   Irreversivel
 }
 
-export enum Natureza_Sinistro {
+export enum SinistroNaturezaType {
   Roubo,
   Furto,
   Apreensao,
   Outros
 }
 
-export interface UsuarioResponsavel {
+export interface ResponsavelUsuarioType {
   id: string;
   nome: string;
   email: string;
@@ -44,18 +44,18 @@ export interface UsuarioResponsavel {
   funcao: string;
 }
 
-export interface FormulariosSelecionados {
-  form: string;
-  etapa: string;
+export interface FormulariosSelecionadosType {
+  form: Tipo_Formulario;
+  etapa?: string;
 }
 
-export interface Formularios {
+export interface FormulariosType {
   numero_processo: string;
   qtd_etapas_formulario: string;
   etapas: string[];
 }
 
-export interface ReportData {
+export interface ReportDataType {
   relatorio_filtrado: {
     id: string;
     numero_processo: string;
@@ -67,9 +67,46 @@ export interface ReportData {
     status: string;
     status_recuperacao_carga: string;
     fato_gerador_recuperacao_carga: string;
-    usuario_responsavel: UsuarioResponsavel;
-    usuarios_permitidos: UsuarioResponsavel[];
-    formularios_selecionados: FormulariosSelecionados[];
-    formularios: Formularios;
+    usuario_responsavel: ResponsavelUsuarioType;
+    usuarios_permitidos: ResponsavelUsuarioType[];
+    formularios_selecionados: FormulariosSelecionadosType[];
+    formularios: FormulariosType;
   }[];
 }
+
+export interface NewReportType {
+  id: string;
+  numero_processo: string;
+  natureza_sinistro: string;
+  cliente: string;
+  cnpj: string;
+  data_entrada: string;
+  data_emissao: string;
+  status: string;
+  status_recuperacao_carga: string;
+  fato_gerador_recuperacao_carga: string;
+  usuario_responsavel: ResponsavelUsuarioType;
+  usuarios_permitidos: ResponsavelUsuarioType[];
+  formularios_selecionados: FormulariosSelecionadosType[];
+  formularios: FormulariosType;
+}
+
+export type Tipo_Formulario = {
+  form1_Cliente_Segurado: boolean;
+  form2_Caracteristica_Sinistro: boolean;
+  form3_Cronologia_Sinistro: boolean;
+  form4_Do_Carregamento: boolean;
+  form5_Motorista: boolean;
+  form6_Ajudantes: boolean;
+  form7_Veiculo_Transportador: boolean;
+  form8_Orgao_Policial: boolean;
+  form9_Gerenciamento_Risco_Veiculo: boolean;
+  form10_Sistemas_Protecao_Carregamento: boolean;
+  form11_Declaracao_Motorista_Ajudante: boolean;
+  form12_Gerenciamento_Risco_Deposito: boolean;
+  form13_Locais_Evento: boolean;
+  form14_Resumo_Averiguacoes: boolean;
+  form15_Recuperacao_Carga: boolean;
+  form16_Anexos_Fotograficos: boolean;
+  form17_Conclusao: boolean;
+};

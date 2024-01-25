@@ -42,7 +42,6 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
             Novo relatório de averiguação
           </h1>
         </div>
-        {/* <span className='pr-8 text-sm'>Etapa {step} de 3</span> */}
       </header>
       <Separator className="h-1 bg-gradient-to-r from-white via-lightMode-colors-blue-200 to-white" />
       {/* Stepper */}
@@ -86,14 +85,6 @@ export function ModelFormNewReport({ items }: StepsNewReportProps) {
 
       {/* Footer Buttons */}
       <footer className="flex flex-col ">
-        {/* <span className="pb-2 text-xs text-center text-muted-foreground">
-          Preencha corretamente todos os campos para garantir o registro preciso
-          e eficiente das informações.{' '}
-          <span className="cursor-pointer text-lightMode-colors-blue-300 hover:text-lightMode-colors-blue-600 hover:underline">
-            Central de Ajuda
-          </span>
-        </span> */}
-        {/* <Separator className="h-1 bg-gradient-to-r from-white via-lightMode-colors-blue-200 to-white" /> */}
         <div className="flex items-center justify-end gap-2 px-8 h-[50px] bg-lightMode-colors-blue-50">
           <Button
             variant="ghost"

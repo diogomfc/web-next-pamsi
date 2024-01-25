@@ -10,31 +10,39 @@ interface ReportData {
 }
 
 //Buscar Relatórios
-export const fetchAllReports = async () => {
+async function getAllReport() {
   try {
     const response = await api.get('/relatorios');
     return response.data;
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 //Buscar um relatório
-export const getReport = async (id: string) => {
+async function getReportById(id: string) {
   try {
     const response = await api.get(`/relatorios/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 //Criar um relatórios
-export const createReport = async (report: ReportData) => {
+async function createReport(report: ReportData) {
   try {
     const response = await api.post('/relatorios', report);
     return response.data;
   } catch (error) {
     console.log(error);
   }
+}
+
+const reportService = {
+  getAllReport,
+  getReportById,
+  createReport
 };
+
+export default reportService;

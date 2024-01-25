@@ -10,6 +10,7 @@ import {
 import { useContext } from 'react';
 
 import { AuthContext } from '@/contexts/AuthContext';
+import { AvatarbaseURL } from '@/env';
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
@@ -32,11 +33,11 @@ export function AccountMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger className=" flex bg-transparent border-0 rounded-none hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent  m-0 p-0 w-full h-full cursor-pointer">
             {/* Perfil */}
-            <div className="flex group cursor-pointer items-center gap-3 rounded-3xl border border-[#20A6B9]/10 bg-[#22385B] pr-3 transition-colors duration-300 hover:border-[#20A6B9] hover:text-white">
+            <div className="flex group cursor-pointer items-center gap-3 rounded-3xl border border-transparent bg-[#22385B] pr-3 transition-colors duration-300 hover:border-[#51A6E3]/20   hover:text-white">
               <Avatar>
                 {avatarName && (
                   <AvatarImage
-                    src={`${process.env.NEXT_PUBLIC_API_URL_RENDER}/images/avatar/${avatarName}`}
+                    src={`${AvatarbaseURL}/images/avatar/${avatarName}`}
                     alt="Avatar"
                   />
                 )}
@@ -72,7 +73,7 @@ export function AccountMenu() {
                       <Avatar className="h-[95px] w-[95px]">
                         {avatarName && (
                           <AvatarImage
-                            src={`${process.env.NEXT_PUBLIC_API_URL_RENDER}/images/avatar/${avatarName}`}
+                            src={`${AvatarbaseURL}/images/avatar/${avatarName}`}
                             alt="Avatar"
                           />
                         )}

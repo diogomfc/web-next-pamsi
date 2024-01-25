@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { CardListReport } from '@/components/averiguacao360/dashboard/card-list-report';
 import { CardTableRow } from '@/components/averiguacao360/dashboard/card-list-table-row';
@@ -20,30 +20,51 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table';
-//import { AuthContext } from '@/contexts/AuthContext';
-import { fetchAllReports } from '@/services/report-services';
-import { ReportData } from '@/types/reportTypes';
+import { AuthContext } from '@/contexts/AuthContext';
+import reportService from '@/services/report-services';
+import { ReportDataType } from '@/types/reportTypes';
 
 export default function Dashboard() {
-  //const { usuario } = useContext(AuthContext);
+  const { usuario } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [allReport, setAllReport] = useState<ReportData>({
+  const [allReport, setAllReport] = useState<ReportDataType>({
     relatorio_filtrado: []
   });
 
+  // Busca todos os relatórios
   useEffect(() => {
-    const getReports = async () => {
+    const requestAllReports = async () => {
       setIsLoading(true);
-      //await new Promise((resolve) => setTimeout(resolve, 10000));
-      const allReports = await fetchAllReports();
-      setAllReport(allReports);
+      const allReportResponse = await reportService.getAllReport();
+
+      // const filteredReports = allReportResponse.relatorio_filtrado.filter(
+      //   (report: ReportDataType) => {
+      //     if (usuario?.funcao === 'Admin' || usuario?.funcao === 'Supervisor') {
+      //       return true;
+      //     } else if (
+      //       usuario?.funcao === 'Analista' ||
+      //       usuario?.funcao === 'Revisor'
+      //     ) {
+      //       return report.relatorio_filtrado.some(
+      //         (user) => user.usuario_responsavel.id === usuario?.id
+      //       );
+      //     } else {
+      //       return false;
+      //     }
+      //   }
+      // );
+
+      // setAllReport({
+      //   ...allReportResponse
+      //   relatorio_filtrado: filteredReports
+      // });
+
+      setAllReport(allReportResponse);
+
       setIsLoading(false);
     };
-
-    getReports();
-  }, []);
-
-  //listar relatórios por data mais recente com date-fns
+    requestAllReports();
+  }, [usuario]);
 
   //Quantidade de relatorios em formalização
   const qtdFormalizando = allReport?.relatorio_filtrado.filter(
