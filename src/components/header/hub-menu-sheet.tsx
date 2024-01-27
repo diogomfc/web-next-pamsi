@@ -96,8 +96,8 @@ export function HubMenuSheet() {
               </div>
 
               <div className="flex flex-col gap-1 ">
-                <NavItemSheet href="/averiguacao360">
-                  <div className="flex items-center gap-2 text-lightMode-colors-blue-700">
+                <NavItemSheet href="/averiguacao360/dashboard">
+                  <div className="flex items-center gap-2 text-lightMode-colors-blue-700 data-[state=close]">
                     <div className=" flex  border border-lightMode-colors-blue-200 rounded-full bg-[#CFE5F6] items-center justify-center  h-9 w-9 hover:border-[#51A6E3]/20  transition-colors  hover:text-white duration-300 ">
                       <Image
                         src="/img/navigation/icons/icon-link-averiguacao360.svg"

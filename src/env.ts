@@ -6,6 +6,7 @@
 //   NODE_ENV: z.string()
 // });
 
-export const AvatarbaseURL = 'http://localhost:3333';
+export const AvatarbaseURL = 'https://api-dev-pamsi-deploy.onrender.com';
+//export const AvatarbaseURL = 'http://localhost:3333';
 
 // export const env = encSchema.parse(process.env);

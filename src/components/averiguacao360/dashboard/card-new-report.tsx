@@ -46,7 +46,7 @@ export function CardNewReport({
           </Link>
 
           <div className="flex flex-col items-center gap-4">
-            <h1 className="text-lg font-bold">{description}</h1>
+            <h1 className="text-base font-bold">{description}</h1>
             <Dialog>
               <DialogTrigger asChild>
                 <Button className="px-2 py-1 border rounded text-lightMode-colors-blue-500 border-lightMode-colors-blue-300 bg-lightMode-colors-white hover:bg-lightMode-colors-blue-500 hover:text-white">

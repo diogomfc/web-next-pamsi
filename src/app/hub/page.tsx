@@ -49,7 +49,7 @@ export default function Hub() {
                     description="Gestão inteligente de averiguações"
                     buttonLabel={
                       <Link
-                        href="/averiguacao360"
+                        href="/averiguacao360/dashboard"
                         className="px-2 py-1 border rounded text-lightMode-colors-blue-500 border-lightMode-colors-blue-300/50 bg-lightMode-colors-white hover:bg-lightMode-colors-blue-500 hover:text-white"
                       >
                         Acessar

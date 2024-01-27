@@ -18,7 +18,7 @@ export function CardStepStatusReport({
   return (
     <div className="border rounded-md border-lightMode-colors-blue-200">
       <div className="flex flex-col justify-center bg-white border-8 rounded-md item-center border-lightMode-colors-blue-100">
-        <main className="flex flex-col items-center gap-4 pt-4 min-h-[280px]">
+        <main className="flex flex-col items-center gap-4 pt-4  min-h-[280px]">
           <div className="flex flex-col items-center justify-center pt-2">
             {status === 'Aprovado' && (
               <>
@@ -82,7 +82,7 @@ export function CardStepStatusReport({
             )}
           </div>
           <div className="flex flex-col items-center justify-center gap-4 pt-8">
-            <span className="text-lg font-bold flex justify-center items-center  text-center w-[300px] h-[60px]">
+            <span className="text-base  font-bold flex justify-center items-center  text-center w-[200px] h-[60px]">
               {description}
             </span>
             <Link

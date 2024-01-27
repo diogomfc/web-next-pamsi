@@ -67,7 +67,7 @@ export function ItemCardStatus({
         <span className="absolute">{qtd}</span>
       </div>
 
-      <span className="text-lg font-bold">{description}</span>
+      <span className="text-base font-bold">{description}</span>
       <Link
         href={link}
         className={`px-2 py-1 border rounded ${

@@ -1,5 +1,6 @@
 'use client';
 
+import { RefreshCcw } from 'lucide-react';
 import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
 
@@ -162,26 +163,33 @@ export default function Dashboard() {
           <div className="relative col-span-3 col-start-7 col-end-13">
             <CardListReport
               title="Meus relatórios"
+              description="Exibindo os 3 relatórios mais recentes."
               icon="/img/averiguacao360/icons/icon-relatorio-list.svg"
               link="/averiguacao360/list-reports"
-              loadReports={requestAllReports}
             >
               {allReport ? (
-                <Table className="">
+                <Table>
                   <TableHeader>
-                    <TableRow className="">
-                      <TableHead className="w-[80px]"></TableHead>
-                      <TableHead className="w-[300px]">Segurado</TableHead>
-                      <TableHead className="w-[140px] text-center">
+                    <TableRow className="hover:bg-transparent">
+                      <TableHead className="flex w-[40px] items-center justify-end">
+                        <RefreshCcw
+                          size={16}
+                          aria-label="Atualizar"
+                          className="transition-transform duration-500 ease-in-out cursor-pointer hover:transform hover:rotate-180 hover:opacity-50"
+                          onClick={requestAllReports}
+                        />
+                      </TableHead>
+                      <TableHead className="">Segurado</TableHead>
+                      <TableHead className="text-center w-[80px]">
                         Progresso
                       </TableHead>
-                      <TableHead className="w-[140px] text-center">
+                      <TableHead className="text-center w-[80px]">
                         Etapas
                       </TableHead>
-                      <TableHead className="w-[140px] text-center">
+                      <TableHead className="text-center w-[40px]">
                         Data
                       </TableHead>
-                      <TableHead className="w-[100px]"></TableHead>
+                      <TableHead className="w-[80px]"></TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -196,43 +204,43 @@ export default function Dashboard() {
                               <Image
                                 src="/img/averiguacao360/icons/icon-relatorio.svg"
                                 alt="Formalizando"
-                                width={20}
-                                height={20}
+                                width={16}
+                                height={16}
                               />
                             ) : report.status === 'Emitido' ? (
                               <Image
                                 src="/img/averiguacao360/icons/icon-relatorio-finalizado.svg"
                                 alt="Emitido"
-                                width={20}
-                                height={20}
+                                width={16}
+                                height={16}
                               />
                             ) : report.status === 'Aprovado' ? (
                               <Image
                                 src="/img/averiguacao360/icons/icon-relatorio-aprovado.svg"
                                 alt="Aprovado"
-                                width={20}
-                                height={20}
+                                width={16}
+                                height={16}
                               />
                             ) : report.status === 'Corrigir' ? (
                               <Image
                                 src="/img/averiguacao360/icons/icon-relatorio-correcao.svg"
                                 alt="Corrigir"
-                                width={20}
-                                height={20}
+                                width={16}
+                                height={16}
                               />
                             ) : report.status === 'Recuperado' ? (
                               <Image
                                 src="/img/averiguacao360/icons/icon-relatorio-recuperado.svg"
                                 alt="Recuperado"
-                                width={20}
-                                height={20}
+                                width={16}
+                                height={16}
                               />
                             ) : report.status === 'Irreversivel' ? (
                               <Image
                                 src="/img/averiguacao360/icons/icon-relatorio-irreversivel.svg"
                                 alt="Irreversivel"
-                                width={20}
-                                height={20}
+                                width={16}
+                                height={16}
                               />
                             ) : null
                           }
