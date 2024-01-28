@@ -27,15 +27,6 @@ export function Pagination({
       </span>
 
       <div className="flex items-center gap-2">
-        {/* <Button
-          variant={'outline'}
-          disabled={pageIndex === 0}
-          className="disabled:opacity-50"
-          onClick={() => { }}
-        >
-          Anterior
-        </Button> */}
-
         <div className="flex items-center gap-6 lg:gap-8">
           <div className="text-xs font-medium">
             Página {pageIndex + 1} de {pages}
@@ -60,15 +51,6 @@ export function Pagination({
             <span className="text-xs sr-only">Última página</span>
           </Button>
         </div>
-
-        {/* <Button
-          variant={'outline'}
-          disabled={pageIndex === pages - 1}
-          className="disabled:opacity-50"
-          onClick={() => { }}
-        >
-          Próxima
-        </Button> */}
       </div>
     </div>
   );

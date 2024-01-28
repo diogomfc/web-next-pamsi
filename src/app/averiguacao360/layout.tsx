@@ -22,7 +22,7 @@ export default function Averiguacao360Layout({
       </main>
 
       <footer className="fixed bottom-0 z-10 w-full px-4 mt-8 bg-white ">
-        <div className="flex items-center justify-between text-sm text-[#042F6C] opacity-50">
+        <div className="flex items-center justify-between text-xs text-[#042F6C] opacity-50">
           <div className="flex gap-1 mb-2">
             <strong>SmartHub</strong>
             <span className="mx-1">•</span>

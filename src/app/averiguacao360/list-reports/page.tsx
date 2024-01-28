@@ -39,17 +39,17 @@ export default function ListReport() {
   }, []);
 
   return (
-    <div className="grid grid-cols-12 px-8 pt-4 pb-8">
-      <header className="flex items-center col-span-12 gap-4 py-4 ">
+    <div className="grid grid-cols-12 px-8 pt-4 pb-8 ">
+      <header className="flex items-center col-span-12 gap-2 py-4 pl-2 ">
         <Image
           src="/img/averiguacao360/icons/icon-relatorio-list.svg"
           alt=""
-          width={50}
-          height={50}
+          width={30}
+          height={30}
         />
-        <h1 className="text-3xl font-semibold">Meus relatórios</h1>
+        <h1 className="text-2xl font-semibold">Meus relatórios</h1>
       </header>
-      <div className="flex items-center col-span-12 py-2 pl-5 border border-b-0 border-lightMode-colors-blue-200 rounded-t-md">
+      <div className="flex items-center col-span-12 py-2 pl-5 bg-white border border-b-0 border-lightMode-colors-blue-200 rounded-t-md">
         <div className="relative flex items-center gap-2">
           <Search
             size={20}
@@ -73,7 +73,7 @@ export default function ListReport() {
 
         {/* <Separator className="relative h-1 -z-10 bottom-[3px] bg-lightMode-colors-blue-50" /> */}
       </div>
-      <main className="flex flex-col col-span-12 border rounded-b-md border-lightMode-colors-blue-200">
+      <main className="flex flex-col col-span-12 bg-white border rounded-b-md border-lightMode-colors-blue-200">
         <Table className="">
           {allReport ? (
             <>
@@ -106,6 +106,7 @@ export default function ListReport() {
                   return (
                     <ListTableRow
                       key={report.id}
+                      link_forms_report={`/averiguacao360/forms-reports/${report.id}`}
                       numero_processo={report.numero_processo}
                       cliente={
                         report.cliente.charAt(0).toUpperCase() +
@@ -206,8 +207,8 @@ export default function ListReport() {
               </p>
             </div>
           )}
-          {isLoading && <CardLoader />}
         </Table>
+        {isLoading && <CardLoader />}
       </main>
     </div>
   );

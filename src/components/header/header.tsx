@@ -65,6 +65,25 @@ export function Header() {
                 </p>
               </Link>
               {pathname.includes('/averiguacao360/list-reports') && (
+                <>
+                  <Link
+                    href="/averiguacao360/list-reports"
+                    className="flex items-center gap-2 cursor-pointer group"
+                  >
+                    <div className="flex items-center gap-2">
+                      <ChevronRight
+                        className="text-[#51A6E3] "
+                        size={16}
+                        strokeWidth={1}
+                      />
+                      <p className="text-xs font-normal text-muted- text-text-lightMode-colors-blue-200/80 ">
+                        Meus relatórios
+                      </p>
+                    </div>
+                  </Link>
+                </>
+              )}
+              {pathname.includes(`/averiguacao360/forms-report`) && (
                 <div className="flex items-center gap-2">
                   <ChevronRight
                     className="text-[#51A6E3] "
@@ -72,7 +91,7 @@ export function Header() {
                     strokeWidth={1}
                   />
                   <p className="text-xs font-normal text-muted- text-text-lightMode-colors-blue-200/80 ">
-                    Meus relatórios
+                    Relatório
                   </p>
                 </div>
               )}

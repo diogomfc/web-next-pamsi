@@ -11,6 +11,7 @@ import {
   UsersRound
 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ReactNode } from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -33,6 +34,7 @@ type ListTableRowProps = {
   usuario_responsavel?: string;
   usuarios_perfil: UserType[];
   qtd_etapas_formulario: number;
+  link_forms_report: string;
 };
 
 export function ListTableRow({
@@ -40,6 +42,7 @@ export function ListTableRow({
   cliente,
   status_report,
   data_entrada,
+  link_forms_report,
   qtd_etapas_formulario,
   usuarios_perfil
 }: ListTableRowProps) {
@@ -107,9 +110,12 @@ export function ListTableRow({
               <FilePenLine size={20} strokeWidth={1.5} />
             </HoverCardTrigger>
             <HoverCardContent className="flex items-center w-auto h-4">
-              <span className="p-1 text-xs text-muted-foreground">
+              <Link
+                href={link_forms_report}
+                className="p-1 text-xs text-muted-foreground"
+              >
                 Editar relatório
-              </span>
+              </Link>
             </HoverCardContent>
           </HoverCard>
           {/* Grupo Averiguação */}
