@@ -36,7 +36,7 @@ export enum StatusFormulario {
   Rejeitado = 'Rejeitado'
 }
 
-interface Usuario {
+export interface Usuario {
   id: string;
   nome: string;
   email: string;
@@ -60,18 +60,39 @@ interface RelatorioFiltrado {
   formularios: Formularios;
 }
 
-interface FormularioSelecionado {
+export interface Relatorio {
+  relatorio_filtrado: RelatorioFiltrado[];
+}
+
+// export interface Relatorio {
+//   relatorio_filtrado: {
+//     id: string;
+//     numero_processo: string;
+//     natureza_sinistro: string;
+//     status: StatusRelatorio;
+//     cliente: string;
+//     cnpj: string;
+//     data_entrada: string;
+//     data_emissao: string;
+//     usuario_responsavel: Usuario;
+//     usuarios_permitidos: Usuario[];
+//     formularios_selecionados: FormularioSelecionado[];
+//     formularios: Formularios;
+//   }[];
+// }
+
+export interface FormularioSelecionado {
   form: string;
   etapa: string;
 }
 
-interface Formularios {
+export interface Formularios {
   numero_processo: string;
   qtd_etapas_formulario: string;
   etapas: Etapas[];
 }
 
-interface Etapas {
+export interface Etapas {
   form1_Cliente_Segurado: Form1ClienteSegurado;
   form2_Caracteristica_Sinistro: Form2CaracteristicaSinistro;
   form3_Cronologia_Sinistro: Form3CronologiaSinistro;
@@ -91,7 +112,27 @@ interface Etapas {
   form17_Conclusao: Form17Conclusao;
 }
 
-interface Form1ClienteSegurado {
+export enum FormName {
+  form1_Cliente_Segurado = 'Cliente segurado',
+  form2_Caracteristica_Sinistro = 'Característica do sinistro',
+  form3_Cronologia_Sinistro = 'Cronologia do sinistro',
+  form4_Do_Carregamento = 'Do carregamento',
+  form5_Motorista = 'Motorista',
+  form6_Ajudantes = 'Ajudantes',
+  form7_Veiculo_Transportador = 'Veículo transportador',
+  form8_Orgao_Policial = 'Órgão policial',
+  form9_Gerenciamento_Risco_Veiculo = 'Gerenciamento de risco do veículo',
+  form10_Sistemas_Protecao_Carregamento = 'Sistemas de proteção do carregamento',
+  form11_Declaracao_Motorista_Ajudante = 'Declaração do motorista e ajudantes',
+  form12_Gerenciamento_Risco_Deposito = 'Gerenciamento de risco do depósito',
+  form13_Locais_Evento = 'Locais do evento',
+  form14_Resumo_Averiguacoes = 'Resumo das averiguações',
+  form15_Recuperacao_Carga = 'Recuperação da carga',
+  form16_Anexos_Fotograficos = 'Anexos fotográficos',
+  form17_Conclusao = 'Conclusão'
+}
+
+export interface Form1ClienteSegurado {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -111,7 +152,7 @@ interface Form1ClienteSegurado {
   uf?: string | null;
 }
 
-interface Form2CaracteristicaSinistro {
+export interface Form2CaracteristicaSinistro {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -122,7 +163,7 @@ interface Form2CaracteristicaSinistro {
   valor_carga?: string | null;
 }
 
-interface Form3CronologiaSinistro {
+export interface Form3CronologiaSinistro {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -141,7 +182,7 @@ interface Form3CronologiaSinistro {
   data_hora_chegada_local?: string | null;
 }
 
-interface Form4DoCarregamento {
+export interface Form4DoCarregamento {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -169,7 +210,7 @@ interface Form4DoCarregamento {
   manifesto?: string | null;
 }
 
-interface Form5Motorista {
+export interface Form5Motorista {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -198,7 +239,7 @@ interface Form5Motorista {
   data_consulta_telerisco_motorista?: string | null; // Ajuste o tipo conforme necessário (por exemplo, para Date)
 }
 
-interface Form6Ajudantes {
+export interface Form6Ajudantes {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -223,7 +264,7 @@ interface Form6Ajudantes {
   vinculo_ajudante_empresa?: string | null;
 }
 
-interface Form7VeiculoTransportador {
+export interface Form7VeiculoTransportador {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -256,7 +297,7 @@ interface Form7VeiculoTransportador {
   uf_carreta?: string | null;
 }
 
-interface Form8OrgaoPolicial {
+export interface Form8OrgaoPolicial {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -275,7 +316,7 @@ interface Form8OrgaoPolicial {
   data_ip?: string | null;
 }
 
-interface Form9GerenciamentoRiscoVeiculo {
+export interface Form9GerenciamentoRiscoVeiculo {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -345,7 +386,7 @@ interface Form9GerenciamentoRiscoVeiculo {
   };
 }
 
-interface Form10SistemasProtecaoCarregamento {
+export interface Form10SistemasProtecaoCarregamento {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -360,7 +401,7 @@ interface Form10SistemasProtecaoCarregamento {
   };
 }
 
-interface Form11DeclaracaoMotoristaAjudante {
+export interface Form11DeclaracaoMotoristaAjudante {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -369,7 +410,7 @@ interface Form11DeclaracaoMotoristaAjudante {
   arquivos_declaracoes: Arquivo[];
 }
 
-interface Form12GerenciamentoRiscoDeposito {
+export interface Form12GerenciamentoRiscoDeposito {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -407,7 +448,7 @@ interface Form12GerenciamentoRiscoDeposito {
   empresa_seguranca_patrimonial_representante: string | null;
 }
 
-interface Form13LocaisEvento {
+export interface Form13LocaisEvento {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -490,7 +531,7 @@ interface Form13LocaisEvento {
   fotos_local_de_recuperacao_da_carga: Arquivo[];
 }
 
-interface Form14ResumoAveriguacoes {
+export interface Form14ResumoAveriguacoes {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -499,7 +540,7 @@ interface Form14ResumoAveriguacoes {
   resumo_averiguacoes: string | null; // Ajuste o tipo conforme necessário
 }
 
-interface Form15RecuperacaoCarga {
+export interface Form15RecuperacaoCarga {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -510,7 +551,7 @@ interface Form15RecuperacaoCarga {
   fato_gerador_recuperacao_carga: string | null; // Ajuste o tipo conforme necessário
 }
 
-interface Form16AnexosFotograficos {
+export interface Form16AnexosFotograficos {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -519,7 +560,7 @@ interface Form16AnexosFotograficos {
   anexos_fotograficos: Arquivo[]; // Certifique-se de definir a estrutura correta para o relacionamento
 }
 
-interface Form17Conclusao {
+export interface Form17Conclusao {
   id: string;
   numero_processo: string;
   status: StatusFormulario;
@@ -527,7 +568,7 @@ interface Form17Conclusao {
   conclusao_averiguacoes: string; // Certifique-se de ajustar o tipo conforme necessário
 }
 
-interface Arquivo {
+export interface Arquivo {
   id: string;
   numero_processo: string;
   relatorio_id: string;
@@ -543,4 +584,4 @@ interface Arquivo {
   arquivo_localizacao: string;
 }
 
-export type ReporTypeForms = RelatorioFiltrado[];
+export type ReporTypeForms = Relatorio;

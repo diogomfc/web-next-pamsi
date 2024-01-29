@@ -2,6 +2,7 @@
 
 import { FilterIcon, RefreshCcw, Search } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { CardLoader } from '@/components/averiguacao360/dashboard/card-loader';
@@ -22,6 +23,7 @@ import reportService from '@/services/report-services';
 import { ReportDataType } from '@/types/reportTypes';
 
 export default function ListReport() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [allReport, setAllReport] = useState<ReportDataType>({
     relatorio_filtrado: []
@@ -37,6 +39,45 @@ export default function ListReport() {
   useEffect(() => {
     requestAllReports();
   }, []);
+
+  const handleEditReport = async (report_id: string) => {
+    // filtrar o report pelo id
+    const reportId = allReport.relatorio_filtrado.find(
+      (item) => item.id === report_id
+    );
+
+    // filtrar os formularios selecionados do report
+    const formsSelected = reportId?.formularios_selecionados.map(
+      (formData) => ({
+        etapa: formData.etapa,
+        form: formData.form,
+        numero_processo: (
+          reportId.formularios.etapas as unknown as {
+            [key: string]: { numero_processo: string };
+          }
+        )[formData.form.toString()].numero_processo,
+        status: (
+          reportId.formularios.etapas as unknown as {
+            [key: string]: { status: string };
+          }
+        )[formData.form.toString()].status
+      })
+    );
+
+    //Repassando os params do primeiro formulario a ser preenchido
+    const form = formsSelected?.[0]?.form ?? {};
+    const etapa = formsSelected?.[0]?.etapa ?? {};
+    const status = formsSelected?.[0]?.status ?? {};
+    const numero_processo = formsSelected?.[0]?.numero_processo ?? {};
+
+    router.push(
+      `/averiguacao360/forms-reports/${report_id}?numero_processo=${numero_processo}&form=${form}&etapa=${etapa}&status=${status}`
+    );
+  };
+
+  // report.formularios_selecionados.length > 0
+  // ? `/averiguacao360/forms-reports/${report.id}/${firstStep?.form}/${firstStep?.etapa}`
+  // : `/averiguacao360/forms-reports/${report.id}`
 
   return (
     <div className="grid grid-cols-12 px-8 pt-4 pb-8 ">
@@ -106,7 +147,7 @@ export default function ListReport() {
                   return (
                     <ListTableRow
                       key={report.id}
-                      link_forms_report={`/averiguacao360/forms-reports/${report.id}`}
+                      link_forms_report={() => handleEditReport(report.id)}
                       numero_processo={report.numero_processo}
                       cliente={
                         report.cliente.charAt(0).toUpperCase() +

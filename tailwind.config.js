@@ -133,7 +133,9 @@ module.exports = {
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        ping: 'ping 100s cubic-bezier(0, 0, 0.2, 1) infinite',
+        bounce: 'bounce 25s infinite ease-in-out'
       }
     }
   },

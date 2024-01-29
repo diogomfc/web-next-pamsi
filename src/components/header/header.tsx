@@ -3,10 +3,11 @@
 import { ChevronRight, LogOut, MessageCircleMore } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useContext } from 'react';
 
 import { AuthContext } from '@/contexts/AuthContext';
+import { useParamsFormName } from '@/utils/form-name';
 
 import { Separator } from '../ui/separator';
 import { AccountMenu } from './account-menu';
@@ -15,7 +16,14 @@ import { HubMenuSheet } from './hub-menu-sheet';
 
 export function Header() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const form = searchParams.get('form');
+  const etapa = searchParams.get('etapa');
+  const numero_processo = searchParams.get('numero_processo');
+
   const { signOut } = useContext(AuthContext);
+
+  const paramsFormName = useParamsFormName();
 
   return (
     <header className="col-span-full flex h-[60px] px-4 items-center border border-transparent border-b-[#51A6E3] bg-[#1D3150]  fixed top-0 z-50 w-full text-[rgb(177,199,223)] lg:h-[60px] lg:px-4">
@@ -83,16 +91,39 @@ export function Header() {
                   </Link>
                 </>
               )}
-              {pathname.includes(`/averiguacao360/forms-report`) && (
+              {form && (
                 <div className="flex items-center gap-2">
                   <ChevronRight
                     className="text-[#51A6E3] "
                     size={16}
                     strokeWidth={1}
                   />
-                  <p className="text-xs font-normal text-muted- text-text-lightMode-colors-blue-200/80 ">
-                    Relatório
-                  </p>
+                  <Link
+                    href="/averiguacao360/list-reports"
+                    className="flex items-center gap-2 cursor-pointer group"
+                  >
+                    <p className="text-xs font-normal text-muted- text-text-lightMode-colors-blue-200/80 ">
+                      Relatórios
+                    </p>
+                  </Link>
+
+                  <ChevronRight
+                    className="text-[#51A6E3] "
+                    size={16}
+                    strokeWidth={1}
+                  />
+                  <span className="text-xs"> Nº {numero_processo}</span>
+                  <ChevronRight
+                    className="text-[#51A6E3] "
+                    size={16}
+                    strokeWidth={1}
+                  />
+                  <div className="flex gap-1">
+                    <span className="flex text-[9px] flex-col items-center w-4 h-4 border rounded-full border-lightMode-colors-blue-100/80">
+                      {etapa}
+                    </span>
+                    <span className="text-xs">{paramsFormName}</span>
+                  </div>
                 </div>
               )}
             </>

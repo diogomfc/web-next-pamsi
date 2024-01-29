@@ -65,8 +65,6 @@ export interface ReportDataType {
     data_entrada: string;
     data_emissao: string;
     status: string;
-    status_recuperacao_carga: string;
-    fato_gerador_recuperacao_carga: string;
     usuario_responsavel: ResponsavelUsuarioType;
     usuarios_permitidos: ResponsavelUsuarioType[];
     formularios_selecionados: FormulariosSelecionadosType[];
